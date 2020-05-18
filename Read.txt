@@ -1,0 +1,1 @@
+Este proyecto esta enfocado a hacer soluciones computacioneles a los metodos numericos para la solucion de ecuaciones lineales 
