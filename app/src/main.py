@@ -1,7 +1,6 @@
 from flask import *
 from flask import render_template
 from flask import Flask
-from metodos.EcuacionesDeUnaVariable import Plus
 from metodos.EcuacionesDeUnaVariable.MetodosPorIntervalos import BusquedasIncrementales
 
 app = Flask(__name__)
@@ -13,7 +12,8 @@ def index():
     return render_template('index.html')  # Regresa un string
 
 
-@app.route('/Metodo1', methods=['GET', 'POST'])  # Decorador o wrap
+# Decorador o wrap
+@app.route('/busquedas_incrementales', methods=['GET', 'POST'])
 def busquedasIncrementales_rout():
     incremento = request.form.get('incremento')
     funcion = request.form.get('funcion')
