@@ -4,7 +4,7 @@ from flask import Flask
 from metodos.EcuacionesDeUnaVariable.MetodosPorIntervalos import BusquedasIncrementales
 from metodos.EcuacionesDeUnaVariable.MetodosPorIntervalos import MetodoBiseccion
 from metodos.EcuacionesDeUnaVariable.MetodosPorIntervalos import ReglaFalsa
-
+from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import PuntoFijos
 app = Flask(__name__)
 
 
@@ -67,5 +67,20 @@ def reglaFalsa_rout():
 
     return render_template('reglaFalsa.html', resultado=resultado)
 
+@app.route('/puntofijo', methods=['GET', 'POST'])  # Decorador o wrap
+def puntoFijo_rout():
+    xa = request.form.get('xa')
+    f = request.form.get('f')
+    g = request.form.get('g')
+    tolerancia = request.form.get('tolerancia')
+    iteraciones = request.form.get('iteraciones')
+    resultado = ""
+   
+    if request.method == 'POST':
+        # print(funcion, extremo_superior,extremo_inferior,tolerancia,iteraciones)
+         puntoFijos = PuntoFijos(xa, tolerancia, iteraciones, f, g)
+         resultado = puntoFijos.metodoPuntoFijo()
 
+    return render_template('puntoFijo.html', resultado=resultado)
+    
 app.run(debug=True)
