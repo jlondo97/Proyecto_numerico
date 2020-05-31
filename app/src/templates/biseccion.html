@@ -38,24 +38,26 @@
         <!-- About-->
         <section class="page-section bg-warning" id="sistemas de ecuaciones">
             <div class="container">
+                <form method="POST">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 text-center">
                         <h2 class="text-white mt-0">Parámetros</h2>
                         <hr class="divider light my-4" />
-                        <input type="text" class="form-control" placeholder="Función">
+                        <input type="text" class="form-control" name="funcion" placeholder="Función">
                         <br>
-                        <input type="text" class="form-control" placeholder="Extremo Inferior">
+                        <input type="text" class="form-control" name = "ei" placeholder="Extremo Inferior">
                         <br>
-                        <input type="text" class="form-control" placeholder="Extremo Superior">
+                        <input type="text" class="form-control" name = "es" placeholder="Extremo Superior">
                         <br>
-                        <input type="text" class="form-control" placeholder="Tolerancia">
+                        <input type="text" class="form-control" name = "tolerancia" placeholder="Tolerancia">
                         <br>
-                        <input type="text" class="form-control" placeholder="Máximo de Iteraciones">
+                        <input type="text" class="form-control" name = "iteracion" placeholder="Máximo de Iteraciones">
                         <br>
-                        <button type="button" class="btn btn-primary">Enviar</button>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
                     </div>
                 </div>
             </div>
+           </form> 
         </section>
         <section class="page-section bg-info" id="sistemas de ecuaciones">
             <form method="POST">
@@ -64,7 +66,7 @@
                         <div class="col-lg-8 text-center">
                             <h2 class="text-white mt-0">Resultado</h2>
                             <hr class="divider light my-4" />
-                            <input type="text" class="form-control" name="Iteraciones" placeholder="la raiz de la función es: ">
+                            <input type="text" class="form-control" name="Iteraciones" placeholder="la raiz de la función es:{{resultado}} ">
                         </div>
                     </div>
                 </div>
