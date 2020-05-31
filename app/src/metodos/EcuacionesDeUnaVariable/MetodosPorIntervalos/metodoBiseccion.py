@@ -55,7 +55,7 @@ class MetodoBiseccion:
                 mensaje = (repr(xm) + " es una raiz")
                 return mensaje
             elif error < self.tolerancia:
-                mensaje = (repr(xm) + " se aproxima a una raiz de la función, con una tolerancia de: " + self.tolerancia)
+                mensaje = (repr(xm) + " se aproxima a una raiz de la función, con una tolerancia de: " + str(self.tolerancia))
                 return mensaje
             else:
                 mensaje = ("Excedio el numero de iteraciones posible")
