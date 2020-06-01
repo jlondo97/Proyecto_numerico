@@ -33,7 +33,14 @@
                     <hr class="divider my-4" />
                 </div>
                 <div class="col-lg-8 align-self-baseline">
-                    <p class="text-white-75 font-weight-light mb-5"> El método de pivoteo total tiene los mismos fundamentos que el pivoteo parcial: La selección de un elemento pivote de manera prudente y no aleatoria puede llevar a reducir considerablemente el error propio de la eliminación. La mecanica sugiere fijar y determinar el pivote a partir de todos los elementos de la matriz de coeficientes. Se debe escoger al mayor absolutamente de los candidatos, que en este caso son todos los elementos de la matriz de coeficientes luego de haberse escogido, se deben realizar todos los movimientos de filas y columnas que haya que hacerse para ubicarlo como primer pivote, luego y después hacer la eliminación.</p>
+                    <p class="text-white-75 font-weight-light mb-5"> El método de pivoteo total tiene los mismos
+                        fundamentos que el pivoteo parcial: La selección de un elemento pivote de manera prudente y no
+                        aleatoria puede llevar a reducir considerablemente el error propio de la eliminación. La
+                        mecanica sugiere fijar y determinar el pivote a partir de todos los elementos de la matriz de
+                        coeficientes. Se debe escoger al mayor absolutamente de los candidatos, que en este caso son
+                        todos los elementos de la matriz de coeficientes luego de haberse escogido, se deben realizar
+                        todos los movimientos de filas y columnas que haya que hacerse para ubicarlo como primer pivote,
+                        luego y después hacer la eliminación.</p>
                     <a class="btn btn-primary btn-xl js-scroll-trigger" href="#sistemas de ecuaciones">Insertar
                         parámetros</a>
                 </div>
@@ -53,14 +60,17 @@
                         <br>
                     </div>
                 </div>
-                        <h2 class="text-white mt-0">Matriz</h2>
-                        <table class="egt" style="align-content: center;">
-                            <tbody id="matrix-table">
+                <h2 class="text-white mt-0">Matriz</h2>
+                <table class="egt" style="align-content: center;">
+                    <tbody id="matrix-table">
 
-                            </tbody>
-                        </table>
-                        <br>
-                    <button type="submit" class="btn btn-success">Enviar</button>
+                    </tbody>
+                </table>
+                <br>
+                <button type="submit" class="btn btn-success">Enviar</button>
+                {%for i in range (0,n)%}
+                <label>x{{i}}={{resultado[i]}}</label>
+                {%endfor%}
             </form>
         </div>
     </section>
