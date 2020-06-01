@@ -150,24 +150,40 @@ def metodoNewton_rout():
 @app.route('/eliminacion_gaussiana', methods=['GET', 'POST'])
 def eliminacion_gaussiana_rout():
 
-    n = request.form.get('n')
-    matriz = np.zeros([int(n), int(n)+1])
-    for i in range(0, int(n)):
-        for j in range(0, int(n)+1):
-            nombre = str(i+1) + "-" + str(j+1)
-            valor = request.form.get(nombre)
-            print(nombre, valor)
-            matriz[i, j] = int(valor)
+  #  n = request.form.get('n')
+   # matriz = np.zeros([int(n), int(n)+1])
+    #for i in range(0, int(n)):
+        #for j in range(0, int(n)+1):
+            #nombre = str(i+1) + "-" + str(j+1)
+            #valor = request.form.get(nombre)
+            #print(nombre, valor)
+            #matriz[i, j] = int(valor)
 
-    if request.method == "POST":
-        print(matriz)
+    #if request.method == "POST":
+        #print(matriz)
 
-        pass
+        #pass
 
         #gaussSimple = Gaussimple(n,matriz)
         # for i in range(0,n):
 
     return render_template('eliminacionGaussiana.html')
+
+@app.route('/pivoteoParcial', methods=['GET', 'POST'])
+def pivoteo_parcial_rout():
+
+    return render_template('pivoteoParcial.html')
+
+@app.route('/pivoteoTotal', methods=['GET', 'POST'])
+def pivoteo_total_rout():
+
+    return render_template('pivoteoTotal.html')
+
+@app.route('/factorizacionEliminacion', methods=['GET', 'POST'])
+def factorizacion_eliminacion_rout():
+
+    return render_template('factorizacionEliminacionGaussiana.html')
+
 
 
 
