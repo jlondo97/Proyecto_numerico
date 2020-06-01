@@ -1,6 +1,7 @@
 from flask import *
 from flask import render_template
 from flask import Flask
+import numpy as np
 from metodos.EcuacionesDeUnaVariable.MetodosPorIntervalos import BusquedasIncrementales
 from metodos.EcuacionesDeUnaVariable.MetodosPorIntervalos import MetodoBiseccion
 from metodos.EcuacionesDeUnaVariable.MetodosPorIntervalos import ReglaFalsa
@@ -143,10 +144,22 @@ def metodoNewton_rout():
         return render_template('newton.html', resultado=resultado)
 
 
-
 @app.route('/eliminacion_gaussiana', methods=['GET', 'POST'])
 def eliminacion_gaussiana_rout():
-    return render_template('eliminacionGaussiana.html')
+    
+    n = request.form.get(n)
+    #matriz= np.zeros([int(n),int(n+1)])
+    #for i in range(0, int(n)):
+        #for j in range(0, int(n+1)):
+            #nombre = str(i+1) + str(j+1)
+            #matriz[i,j]=request.form.get(nombre)
+
+    if request.method =="POST":
+        pass
+
+        #gaussSimple = Gaussimple(n,matriz)
+        #for i in range(0,n):
+    return render_template('eliminacionGaussiana.html',n=n)
 
 
 app.run(debug=True)
