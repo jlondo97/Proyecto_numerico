@@ -10,6 +10,7 @@ from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import MetodoSecante
 from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import MetodoNewton
 from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import MetodoRaicesMultiples
 from metodos.SistemasDeEcuaciones.MetodosDeEliminacion import EliminacionGaussianaSimple
+from metodos.SistemasDeEcuaciones.MetodosDeEliminacion import EliminacionGaussianaPivoteoParcial
 app = Flask(__name__)
 
 
@@ -170,6 +171,21 @@ def eliminacion_gaussiana_rout():
 
 @app.route('/pivoteoParcial', methods=['GET', 'POST'])
 def pivoteo_parcial_rout():
+    n = request.form.get('n')
+    if str(n) == "None":
+        n = 0
+    matriz = np.zeros([int(n), int(n)+1])
+    for i in range(0, int(n)):
+        for j in range(0, int(n)+1):
+            nombre = str(i+1) + "-" + str(j+1)
+            valor = request.form.get(nombre)
+            matriz[i, j] = int(valor)
+
+    if request.method == "POST":
+        print(matriz)
+        gaussParcial = EliminacionGaussianaPivoteoParcial(n,matriz)
+        resultado = gaussParcial.eliminacionGaussianaPivoteoParcial()
+        print(resultado)
 
     return render_template('pivoteoParcial.html')
 
