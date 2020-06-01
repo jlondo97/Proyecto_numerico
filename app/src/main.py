@@ -49,7 +49,7 @@ def metodoBiseccion_rout():
     resultado = ""
 
     if request.method == 'POST':
-        #print(funcion, extremo_superior,extremo_inferior,tolerancia,iteraciones)
+        # print(funcion, extremo_superior,extremo_inferior,tolerancia,iteraciones)
         metodoBiseccion = MetodoBiseccion(
             extremo_inferior, extremo_superior, tolerancia, iteraciones, funcion)
         resultado = metodoBiseccion.metodoBiseccion()
@@ -138,7 +138,7 @@ def metodoNewton_rout():
     resultado = ""
 
     if request.method == 'POST':
-        #print(x0, f, tolerancia, iteraciones)
+        # print(x0, f, tolerancia, iteraciones)
         metodonewton = MetodoNewton(x0, tolerancia, iteraciones, f)
         resultado = metodonewton.metodoNewton()
 
@@ -160,15 +160,16 @@ def eliminacion_gaussiana_rout():
             nombre = str(i+1) + "-" + str(j+1)
             valor = request.form.get(nombre)
             matriz[i, j] = int(valor)
-
+    resultado = ""
     if request.method == "POST":
-        print(matriz)
-        gaussSimple = EliminacionGaussianaSimple(n,matriz)
+
+        gaussSimple = EliminacionGaussianaSimple(n, matriz)
         resultado = gaussSimple.eliminacionGaussianaSimple()
         print(resultado)
 
-    return render_template('eliminacionGaussiana.html')
+    return render_template('eliminacionGaussiana.html', n=int(n), resultado=resultado)
 
+# -------pivoteo parcial----------------
 @app.route('/pivoteoParcial', methods=['GET', 'POST'])
 def pivoteo_parcial_rout():
     n = request.form.get('n')
@@ -183,23 +184,23 @@ def pivoteo_parcial_rout():
 
     if request.method == "POST":
         print(matriz)
-        gaussParcial = EliminacionGaussianaPivoteoParcial(n,matriz)
+        gaussParcial = EliminacionGaussianaPivoteoParcial(n, matriz)
         resultado = gaussParcial.eliminacionGaussianaPivoteoParcial()
         print(resultado)
 
     return render_template('pivoteoParcial.html')
+
 
 @app.route('/pivoteoTotal', methods=['GET', 'POST'])
 def pivoteo_total_rout():
 
     return render_template('pivoteoTotal.html')
 
+
 @app.route('/factorizacionEliminacion', methods=['GET', 'POST'])
 def factorizacion_eliminacion_rout():
 
     return render_template('factorizacionEliminacionGaussiana.html')
-
-
 
 
 app.run(debug=True)

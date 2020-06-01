@@ -56,14 +56,17 @@
                         <br>
                     </div>
                 </div>
-                        <h2 class="text-white mt-0">Matriz</h2>
-                        <table class="egt" style="align-content: center;">
-                            <tbody id="matrix-table">
+                <h2 class="text-white mt-0">Matriz</h2>
+                <table class="egt" style="align-content: center;">
+                    <tbody id="matrix-table">
 
-                            </tbody>
-                        </table>
-                        <br>
-                    <button type="submit" class="btn btn-success">Enviar</button>
+                    </tbody>
+                </table>
+                <br>
+                <button type="submit" class="btn btn-success">Enviar</button>
+                {%for i in range (0,n)%}
+                <label>x{{i}}={{resultado[i]}}</label>
+                {%endfor%}
             </form>
         </div>
     </section>
