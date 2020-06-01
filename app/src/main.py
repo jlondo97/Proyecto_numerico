@@ -4,9 +4,9 @@ from flask import Flask
 from metodos.EcuacionesDeUnaVariable.MetodosPorIntervalos import BusquedasIncrementales
 from metodos.EcuacionesDeUnaVariable.MetodosPorIntervalos import MetodoBiseccion
 from metodos.EcuacionesDeUnaVariable.MetodosPorIntervalos import ReglaFalsa
-from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import PuntoFijos
+from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import PuntoFijo
 from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import MetodoSecante
-from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import MetodoNewton
+#from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import MetodoNewton
 from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import MetodoRaicesMultiples
 app = Flask(__name__)
 
@@ -86,7 +86,7 @@ def puntoFijo_rout():
 
     if request.method == 'POST':
         # print(funcion, extremo_superior,extremo_inferior,tolerancia,iteraciones)
-        puntoFijos = PuntoFijos(xa, tolerancia, iteraciones, f, g)
+        puntoFijos = PuntoFijo(xa, tolerancia, iteraciones, f, g)
         resultado = puntoFijos.metodoPuntoFijo()
     return render_template('puntoFijo.html', resultado=resultado)
 
@@ -122,7 +122,7 @@ def raicesMultiples_rout():
         raicesMultiples = MetodoRaicesMultiples(x0, tolerancia, iteraciones, f)
         resultado = raicesMultiples.metodoRaicesMultiples()
 
-    return render_template('raicesMultiples', resultado=resultado)
+    return render_template('raicesMultiples.html', resultado=resultado)
 
 
 # metodo Newton

@@ -2,7 +2,7 @@ from __future__ import division
 from sympy import *
 from sympy.parsing.sympy_parser import parse_expr
 
-class PuntoFijos:
+class PuntoFijo:
 
   f = Function('fx')
   g = Function('gx')
