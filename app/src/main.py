@@ -168,6 +168,22 @@ def eliminacion_gaussiana_rout():
 
     return render_template('eliminacionGaussiana.html')
 
+@app.route('/pivoteoParcial', methods=['GET', 'POST'])
+def pivoteo_parcial_rout():
+
+    return render_template('pivoteoParcial.html')
+
+@app.route('/pivoteoTotal', methods=['GET', 'POST'])
+def pivoteo_total_rout():
+
+    return render_template('pivoteoTotal.html')
+
+@app.route('/factorizacionEliminacion', methods=['GET', 'POST'])
+def factorizacion_eliminacion_rout():
+
+    return render_template('factorizacionEliminacionGaussiana.html')
+
+
 
 
 app.run(debug=True)
