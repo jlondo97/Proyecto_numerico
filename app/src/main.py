@@ -9,7 +9,7 @@ from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import PuntoFijo
 from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import MetodoSecante
 from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import MetodoNewton
 from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import MetodoRaicesMultiples
-
+from metodos.SistemasDeEcuaciones.MetodosDeEliminacion import EliminacionGaussianaSimple
 app = Flask(__name__)
 
 
@@ -158,16 +158,13 @@ def eliminacion_gaussiana_rout():
         for j in range(0, int(n)+1):
             nombre = str(i+1) + "-" + str(j+1)
             valor = request.form.get(nombre)
-            print(nombre, valor)
             matriz[i, j] = int(valor)
 
     if request.method == "POST":
         print(matriz)
-
-        pass
-
-        #gaussSimple = Gaussimple(n,matriz)
-        # for i in range(0,n):
+        gaussSimple = EliminacionGaussianaSimple(n,matriz)
+        resultado = gaussSimple.eliminacionGaussianaSimple()
+        print(resultado)
 
     return render_template('eliminacionGaussiana.html')
 
