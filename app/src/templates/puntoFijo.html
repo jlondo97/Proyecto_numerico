@@ -43,34 +43,23 @@
                     <div class="col-lg-8 text-center">
                         <h2 class="text-white mt-0">Parámetros</h2>
                         <hr class="divider light my-4" />
-                        <input type="text" class="form-control" name = "f" placeholder="Función F(x)">
+                        <input type="text" class="form-control" name = "f" placeholder="Función F(x)" required>
                         <br>
-                        <input type="text" class="form-control" name = "g" placeholder="Función G(x)">
+                        <input type="text" class="form-control" name = "g" placeholder="Función G(x)" required>
                         <br>
-                        <input type="text" class="form-control" name = "xa" placeholder="Valor inicial">
+                        <input type="text" class="form-control" name = "xa" placeholder="Valor inicial" required>
                         <br>
-                        <input type="text" class="form-control" name = "iteraciones" placeholder="Máximo de Iteraciones">
+                        <input type="text" class="form-control" name = "iteraciones" placeholder="Máximo de Iteraciones" required>
                         <br>
-                        <input type="text" class="form-control" name = "tolerancia" placeholder="Tolerancia">
+                        <input type="text" class="form-control" name = "tolerancia" placeholder="Tolerancia" required>
                         <br>
                         <button type="submit" class="btn btn-primary">Enviar</button>
+                        <hr class="divider light my-4" />
+                        <input type="text" class="form-control" name="Iteraciones" placeholder="Resultado: {{resultado}} ">
                     </div>
                 </div>
             </div>
           </form> 
-        </section>
-        <section class="page-section bg-info" id="sistemas de ecuaciones">
-            <form method="POST">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8 text-center">
-                            <h2 class="text-white mt-0">Resultado</h2>
-                            <hr class="divider light my-4" />
-                            <input type="text" class="form-control" name="Iteraciones" placeholder="la raiz de la función es:{{resultado}} ">
-                        </div>
-                    </div>
-                </div>
-            </form>
         </section>
         
         <!-- Contact-->
