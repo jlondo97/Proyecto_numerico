@@ -29,7 +29,7 @@
                         <hr class="divider my-4" />
                     </div>
                     <div class="col-lg-8 align-self-baseline">
-                        <p class="text-white-75 font-weight-light mb-5">El objetivo de este método es buscar una raíz de una función a partir de un valor inicial, una tolerancia y un número de iteraciones, para este caso no es necesario tener un intervalo. Una de las condiciones para garantizar la convergencia del método de Newton es que f ´(Xv) tiene que ser diferente de cero . Si al ejecutar el método de Newton se observa que f´(xn)  se aproxima a cero, la rapidez del método disminuye y hay una posible raíz múltiple.</p>
+                        <p class="text-white-75 font-weight-light mb-5"> El método de eliminación Gaussiana para la solución de sistemas de ecuaciones lineales consiste en convertir a través de operaciones básicas llamadas operaciones de renglón un sistema en otro equivalente más sencillo cuya respuesta pueda leerse de manera directa.</p>
                         <a class="btn btn-primary btn-xl js-scroll-trigger" href="#sistemas de ecuaciones">Insertar parámetros</a>
                     </div>
                 </div>
@@ -45,11 +45,31 @@
                         <hr class="divider light my-4" />
                         <input type="text" class="form-control" name="cantidad_ecuaciones" placeholder="Cantidad de Ecuaciones" required>
                         <br>
-                        <input type="text" class="form-control" placeholder="Inserte las filas separadas por espacio" required>
-                        <br>
                         <button type="submit" class="btn btn-success">Enviar</button>
+                    </div>
+                </div>
+            </form>  
+        </div>
+        </section>
+
+        <section class="page-section bg-primary" id="sistemas de ecuaciones">
+            <div class="container">
+            <form method="POST">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <h2 class="text-white mt-0">Matriz</h2>
                         <hr class="divider light my-4" />
-                        <input type="text" class="form-control" placeholder="Resultado: ">
+                        <table class="egt">
+                        {% for i in range(0,5) %}
+                            <tr>
+                            {% for i in range(0,5) %}  
+                                <th><input type=text></th>
+                            {% endfor %} 
+                            </tr>
+                        {% endfor %} 
+                          </table>
+                       
+                        <a type="submit"class="btn btn-success" href="/eliminacion_gaussiana_2" role="button">Aplicar</a>
                     </div>
                 </div>
             </form>  
