@@ -201,7 +201,7 @@ def pivoteo_total_rout():
         for j in range(0, int(n)+1):
             nombre = str(i+1) + "-" + str(j+1)
             valor = request.form.get(nombre)
-            matriSz[i, j] = int(valor)
+            matriz[i, j] = int(valor)
     resultado = ""
     if request.method == "POST":
         gaussTotal = EliminacionGaussianaPivoteoTotal(n, matriz)
