@@ -51,31 +51,19 @@
                     <div class="col-lg-8 text-center">
                         <h2 class="text-white mt-0">Parámetros</h2>
                         <hr class="divider light my-4" />
-                        <input type="text" class="form-control" name="n" placeholder="Cantidad de Ecuaciones" required>
+                        <input type="text" id="matrix-size-input" class="form-control" name="n"
+                            placeholder="Cantidad de Ecuaciones" required>
                         <br>
-                        <button type="submit" class="btn btn-success">Enviar</button>
                     </div>
                 </div>
-            </form>
-        </div>
-    </section>
-
-    <section class="page-section bg-primary" id="sistemas de ecuaciones">
-        <div class="container">
-            <form method="POST">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 text-center">
                         <h2 class="text-white mt-0">Matriz</h2>
                         <hr class="divider light my-4" />
                         <table class="egt" style="align-content: center;">
+                            <tbody id="matrix-table">
 
-                            {% for i in range(0,n) %}
-                            <tr>
-                                {% for j in range(0,n+1) %}
-                                <th><input type=text style="width: 30px;" value="0" name="{{i+1}}{{j+1}}"></th>
-                                {% endfor %}
-                            </tr>
-                            {% endfor %}
+                            </tbody>
                         </table>
 
                         <button type="submit" class="btn btn-success">Enviar</button>
@@ -123,6 +111,39 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
+    <script>
+        const matrixSizeInput = document.getElementById('matrix-size-input');
+        window.onload = () => {
+            matrixSizeInput.addEventListener('keyup', (event) => {
+                debugger;
+
+                const matrixTable = document.getElementById('matrix-table');
+
+                const matrixSizeInputValue = !isNaN(event.target.value) ? parseInt(event.target.value) : '';
+
+                matrixSizeInput.value = matrixSizeInputValue;
+                debugger;
+                if (Number.isInteger(matrixSizeInputValue)) {
+
+                    for (let i = 1; i <= matrixSizeInputValue; i++) {
+                        const row = document.createElement('tr');
+                        debugger;
+                        for (let j = 1; j - 1 <= matrixSizeInputValue; j++) {
+                            debugger;
+                            const cell = document.createElement('td');
+                            const input = document.createElement('input');
+                            input.setAttribute('name', i + '-' + j);
+                            input.setAttribute('style', 'width: 40px;')
+
+                            cell.appendChild(input);
+                            row.appendChild(cell);
+                            matrixTable.appendChild(row);
+                        }
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
