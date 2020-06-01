@@ -33,7 +33,13 @@
                     <hr class="divider my-4" />
                 </div>
                 <div class="col-lg-8 align-self-baseline">
-                    <p class="text-white-75 font-weight-light mb-5"> El pivoteo parcial es una de las técnicas de pivoteo. Dicta que el elemento pivote que debe escogerse es el mayor absolutamente de cada columna. Así inicialmente, se organiza la matriz para que el elemento absolutamente mayor de la primera columna sea el primer pivote, luego se realiza la eliminación y a la hora de pasar al segundo elemento debe considerarse el mayor absolutamente para ubicarlo como pivote y nuevamente hacer la eliminación, el proceso sigue hasta que ya no hayan elementos bajo el pivote o hasta que se hayan recorrido todas las columnas de la matriz.</p>
+                    <p class="text-white-75 font-weight-light mb-5"> El pivoteo parcial es una de las técnicas de
+                        pivoteo. Dicta que el elemento pivote que debe escogerse es el mayor absolutamente de cada
+                        columna. Así inicialmente, se organiza la matriz para que el elemento absolutamente mayor de la
+                        primera columna sea el primer pivote, luego se realiza la eliminación y a la hora de pasar al
+                        segundo elemento debe considerarse el mayor absolutamente para ubicarlo como pivote y nuevamente
+                        hacer la eliminación, el proceso sigue hasta que ya no hayan elementos bajo el pivote o hasta
+                        que se hayan recorrido todas las columnas de la matriz.</p>
                     <a class="btn btn-primary btn-xl js-scroll-trigger" href="#sistemas de ecuaciones">Insertar
                         parámetros</a>
                 </div>
@@ -53,14 +59,17 @@
                         <br>
                     </div>
                 </div>
-                        <h2 class="text-white mt-0">Matriz</h2>
-                        <table class="egt" style="align-content: center;">
-                            <tbody id="matrix-table">
+                <h2 class="text-white mt-0">Matriz</h2>
+                <table class="egt" style="align-content: center;">
+                    <tbody id="matrix-table">
 
-                            </tbody>
-                        </table>
-                        <br>
-                    <button type="submit" class="btn btn-success">Enviar</button>
+                    </tbody>
+                </table>
+                <br>
+                <button type="submit" class="btn btn-success">Enviar</button>
+                {%for i in range (0,n)%}
+                <label>x{{i}}={{resultado[i]}}</label>
+                {%endfor%}
             </form>
         </div>
     </section>
