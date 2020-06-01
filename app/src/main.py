@@ -7,8 +7,9 @@ from metodos.EcuacionesDeUnaVariable.MetodosPorIntervalos import MetodoBiseccion
 from metodos.EcuacionesDeUnaVariable.MetodosPorIntervalos import ReglaFalsa
 from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import PuntoFijo
 from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import MetodoSecante
-#from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import MetodoNewton
+from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import MetodoNewton
 from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import MetodoRaicesMultiples
+
 app = Flask(__name__)
 
 
@@ -127,24 +128,42 @@ def raicesMultiples_rout():
 
 
 # metodo Newton
+@app.route('/metodoNewton', methods=['GET', 'POST'])  # Decorador o wrap
+def metodoNewton_rout():
+    x0 = request.form.get('x0')
+    f = request.form.get('f')
+    tolerancia = request.form.get('tolerancia')
+    iteraciones = request.form.get('iteraciones')
+    resultado = ""
+
+    if request.method == 'POST':
+        #print(x0, f, tolerancia, iteraciones)
+        metodonewton = MetodoNewton(x0, tolerancia, iteraciones, f)
+        resultado = metodonewton.metodoNewton()
+
+        return render_template('newton.html', resultado=resultado)
+
 
 @app.route('/eliminacion_gaussiana', methods=['GET', 'POST'])
 def eliminacion_gaussiana_rout():
-    
-    n = request.form.get(n)
-    #matriz= np.zeros([int(n),int(n+1)])
-    #for i in range(0, int(n)):
-        #for j in range(0, int(n+1)):
-            #nombre = str(i+1) + str(j+1)
-            #matriz[i,j]=request.form.get(nombre)
 
-    if request.method =="POST":
+    n = request.form.get('n')
+    matriz = np.zeros([int(n), int(n)+1])
+    for i in range(0, int(n)):
+        for j in range(0, int(n)+1):
+            nombre = str(i+1) + str(j+1)
+            valor = request.form.get(nombre)
+            print(nombre, valor)
+            ##matriz[i, j] = int(valor)
+
+    if request.method == "POST":
+        #print(matriz[3, 3])
         pass
 
         #gaussSimple = Gaussimple(n,matriz)
-        #for i in range(0,n):
-    return render_template('eliminacionGaussiana.html',n=n)
+        # for i in range(0,n):
 
+    return render_template('eliminacionGaussiana.html', n=int(3))
 
 
 app.run(debug=True)
