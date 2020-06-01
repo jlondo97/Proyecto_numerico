@@ -1,50 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Análisis Numérico en la Web</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='styles.css')}}" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
-        <!-- Third party plugin CSS-->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{{url_for('static', filename='styles.css')}}" rel="stylesheet" />
-    </head>
-    <body id="page-top">
-        <!-- Navigation-->
-        <!-- Masthead-->
-        <header class="masthead">
-            <div class="container h-100">
-                <div class="row h-100 align-items-center justify-content-center text-center">
-                    <div class="col-lg-10 align-self-end">
-                        <h1 class="text-uppercase text-white font-weight-bold">Método de Bisección</h1>
-                        <hr class="divider my-4" />
-                    </div>
-                    <div class="col-lg-8 align-self-baseline">
-                        <p class="text-white-75 font-weight-light mb-5">El método de bisección es un algoritmo de búsqueda de raíces que trabaja dividiendo el intervalo a la mitad y seleccionando el subintervalo que tiene la raíz.Este es uno de los métodos más sencillos y de fácil intuición para resolver ecuaciones de una variable, también conocido como Método de Intervalo Medio.</p>
-                        <a class="btn btn-warning btn-xl js-scroll-trigger" href="#sistemas de ecuaciones">Insertar parámetros</a>
-                    </div>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Análisis Numérico en la Web</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='styles.css')}}" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+        rel="stylesheet" type="text/css" />
+    <!-- Third party plugin CSS-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css"
+        rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{{url_for('static', filename='styles.css')}}" rel="stylesheet" />
+</head>
+
+<body id="page-top">
+    <!-- Navigation-->
+    <!-- Masthead-->
+    <header class="masthead">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center justify-content-center text-center">
+                <div class="col-lg-10 align-self-end">
+                    <h1 class="text-uppercase text-white font-weight-bold">Método de Bisección</h1>
+                    <hr class="divider my-4" />
+                </div>
+                <div class="col-lg-8 align-self-baseline">
+                    <p class="text-white-75 font-weight-light mb-5">El método de bisección es un algoritmo de búsqueda
+                        de raíces que trabaja dividiendo el intervalo a la mitad y seleccionando el subintervalo que
+                        tiene la raíz.Este es uno de los métodos más sencillos y de fácil intuición para resolver
+                        ecuaciones de una variable, también conocido como Método de Intervalo Medio.</p>
+                    <a class="btn btn-warning btn-xl js-scroll-trigger" href="#sistemas de ecuaciones">Insertar
+                        parámetros</a>
                 </div>
             </div>
-        </header>
-        <!-- About-->
-        <section class="page-section bg-warning" id="sistemas de ecuaciones">
-            <div class="container">
-                <form method="POST">
+        </div>
+    </header>
+    <!-- About-->
+    <section class="page-section bg-warning" id="sistemas de ecuaciones">
+        <div class="container">
+            <form method="POST">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 text-center">
                         <h2 class="text-white mt-0">Parámetros</h2>
                         <hr class="divider light my-4" />
                         <input type="text" class="form-control" name="funcion" placeholder="Función" required>
                         <br>
+<<<<<<< HEAD
                         <input type="text" class="form-control" name = "ei" placeholder="Extremo Inferior" required>
                         <br>
                         <input type="text" class="form-control" name = "es" placeholder="Extremo Superior" required>
@@ -52,49 +61,86 @@
                         <input type="text" class="form-control" name = "tolerancia" placeholder="Tolerancia" required>
                         <br>
                         <input type="text" class="form-control" name = "iteracion" placeholder="Máximo de Iteraciones" required>
+=======
+                        <input type="text" class="form-control" name="ei" placeholder="Extremo Inferior">
+                        <br>
+                        <input type="text" class="form-control" name="es" placeholder="Extremo Superior">
+                        <br>
+                        <input type="text" class="form-control" name="tolerancia" placeholder="Tolerancia">
+                        <br>
+                        <input type="text" class="form-control" name="iteracion" placeholder="Máximo de Iteraciones">
+>>>>>>> 9a937339d86d4d7d10f4cd89751aeb859d05630b
                         <br>
                         <button type="submit" class="btn btn-primary">Enviar</button>
                         <hr class="divider light my-4" />
                             <input type="text" class="form-control" name="Iteraciones" placeholder="Resultado: {{resultado}} ">
                     </div>
                 </div>
+<<<<<<< HEAD
             </div>
            </form> 
         </section>
         
         <!-- Contact-->
         <section class="page-section bg-dark text-white" id="contact">
+=======
+        </div>
+        </form>
+    </section>
+    <section class="page-section bg-info" id="sistemas de ecuaciones">
+        <form method="POST">
+>>>>>>> 9a937339d86d4d7d10f4cd89751aeb859d05630b
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 text-center">
-                        <h2 class="mt-0">Contáctanos!</h2>
-                        <hr class="divider my-4" />
-                        <p class="text-muted mb-5">Si tienes algún inconveniente o duda ¡Contáctanos!, intentaremos responderte lo antes posible.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
-                        <i class="fas fa-phone fa-3x mb-3 text-muted"></i>
-                        <div>+57 305 4452359</div>
-                    </div>
-                    <div class="col-lg-4 mr-auto text-center">
-                        <i class="fas fa-envelope fa-3x mb-3 text-muted"></i
-                        ><!-- Make sure to change the email address in BOTH the anchor text and the link target below!--><a class="d-block" href="mailto:contact@yourwebsite.com">contact@yourwebsite.com</a>
+                        <h2 class="text-white mt-0">Resultado</h2>
+                        <hr class="divider light my-4" />
+                        <input type="text" class="form-control" name="Iteraciones"
+                            placeholder="la raiz de la función es:{{resultado}} ">
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- Footer-->
-        <footer class="bg-light py-5">
-            <div class="container"><div class="small text-center text-muted">Copyright © 2020 - Start Bootstrap</div></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
-        <!-- Third party plugin JS-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+        </form>
+    </section>
+
+    <!-- Contact-->
+    <section class="page-section bg-dark text-white" id="contact">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="mt-0">Contáctanos!</h2>
+                    <hr class="divider my-4" />
+                    <p class="text-muted mb-5">Si tienes algún inconveniente o duda ¡Contáctanos!, intentaremos
+                        responderte lo antes posible.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
+                    <i class="fas fa-phone fa-3x mb-3 text-muted"></i>
+                    <div>+57 305 4452359</div>
+                </div>
+                <div class="col-lg-4 mr-auto text-center">
+                    <i class="fas fa-envelope fa-3x mb-3 text-muted"></i>
+                    <!-- Make sure to change the email address in BOTH the anchor text and the link target below!--><a
+                        class="d-block" href="mailto:contact@yourwebsite.com">contact@yourwebsite.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer-->
+    <footer class="bg-light py-5">
+        <div class="container">
+            <div class="small text-center text-muted">Copyright © 2020 - Start Bootstrap</div>
+        </div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Third party plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+</body>
+
 </html>
