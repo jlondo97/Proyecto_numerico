@@ -147,6 +147,11 @@ def metodoNewton_rout():
 @app.route('/eliminacion_gaussiana', methods=['GET', 'POST'])
 def eliminacion_gaussiana_rout():
 
+    return render_template('eliminacionGaussiana.html')
+
+@app.route('/eliminacion_gaussiana_2', methods=['GET', 'POST'])
+def eliminacion_gaussiana_2_rout():
+
     n = request.form.get('n')
     matriz = np.zeros([int(n), int(n)+1])
     for i in range(0, int(n)):
@@ -163,7 +168,9 @@ def eliminacion_gaussiana_rout():
         #gaussSimple = Gaussimple(n,matriz)
         # for i in range(0,n):
 
-    return render_template('eliminacionGaussiana.html', n=int(3))
+    return render_template('eliminacionGaussiana2.html', n=int(3))
+
+
 
 
 app.run(debug=True)

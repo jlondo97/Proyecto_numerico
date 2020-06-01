@@ -44,24 +44,39 @@
         </div>
     </header>
     <!-- About-->
+
     <section class="page-section bg-primary" id="sistemas de ecuaciones">
         <div class="container">
             <form method="POST">
+                        <h2 class="text-white mt-0">Matriz</h2>
+                        <table class="egt" style="align-content: center;">
+
+                            {% for i in range(0,n) %}
+                            <tr>
+                                {% for j in range(0,n+1) %}
+                                <th><input type=text style="width: 30px;" value="0" name="{{i+1}}{{j+1}}"></th>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </table>
+                        <br>
+                        <button type="submit" class="btn btn-success">Enviar</button>
+               </form>
+          </div>
+    </section>
+
+    <section class="page-section bg-warning" id="resultado">
+            <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 text-center">
-                        <h2 class="text-white mt-0">Parámetros</h2>
+                        <h2 class="text-white mt-0">Resultado</h2>
                         <hr class="divider light my-4" />
-                        <input type="number" class="form-control" min="0" max="35" name="n" placeholder="Cantidad de Ecuaciones" required>
-                        <br>
-                        <a type="submit" class="btn btn-success" href="/eliminacion_gaussiana_2" role="button">Aplicar</a>
+                        <input type="text" class="form-control"  placeholder="Valor de X: ">
+                        <input type="text" class="form-control"  placeholder="Matriz: ">
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
     </section>
-    <!DOCTYPE html>
-<html lang="en">
-
 
     <!-- Contact-->
     <section class="page-section bg-dark text-white" id="contact">
@@ -104,3 +119,12 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
