@@ -127,4 +127,10 @@ def raicesMultiples_rout():
 
 # metodo Newton
 
+
+@app.route('/eliminacion_gaussiana', methods=['GET', 'POST'])
+def eliminacion_gaussiana_rout():
+    return render_template('eliminacionGaussiana.html')
+
+
 app.run(debug=True)
