@@ -6,8 +6,9 @@ from metodos.EcuacionesDeUnaVariable.MetodosPorIntervalos import MetodoBiseccion
 from metodos.EcuacionesDeUnaVariable.MetodosPorIntervalos import ReglaFalsa
 from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import PuntoFijo
 from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import MetodoSecante
-#from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import MetodoNewton
+from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import MetodoNewton
 from metodos.EcuacionesDeUnaVariable.MetodosAbiertos import MetodoRaicesMultiples
+
 app = Flask(__name__)
 
 
@@ -126,6 +127,21 @@ def raicesMultiples_rout():
 
 
 # metodo Newton
+@app.route('/metodoNewton', methods=['GET', 'POST'])  # Decorador o wrap
+def metodoNewton_rout():
+    x0 = request.form.get('x0')
+    f = request.form.get('f')
+    tolerancia = request.form.get('tolerancia')
+    iteraciones = request.form.get('iteraciones')
+    resultado = ""
+
+    if request.method == 'POST':
+        #print(x0, f, tolerancia, iteraciones)
+        metodonewton = MetodoNewton(x0, tolerancia, iteraciones, f)
+        resultado = metodonewton.metodoNewton()
+
+        return render_template('newton.html', resultado=resultado)
+
 
 
 @app.route('/eliminacion_gaussiana', methods=['GET', 'POST'])
