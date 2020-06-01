@@ -151,6 +151,8 @@ def metodoNewton_rout():
 def eliminacion_gaussiana_rout():
 
     n = request.form.get('n')
+    if str(n) == "None":
+        n = 0
     matriz = np.zeros([int(n), int(n)+1])
     for i in range(0, int(n)):
         for j in range(0, int(n)+1):
