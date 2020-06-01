@@ -144,6 +144,9 @@ def metodoNewton_rout():
         return render_template('newton.html', resultado=resultado)
 
 
+# ------------------------- Sistemas de ecuaciones -------------
+
+# Eliminacion gaussina simple
 @app.route('/eliminacion_gaussiana', methods=['GET', 'POST'])
 def eliminacion_gaussiana_rout():
 
@@ -165,6 +168,7 @@ def eliminacion_gaussiana_rout():
         # for i in range(0,n):
 
     return render_template('eliminacionGaussiana.html')
+
 
 
 app.run(debug=True)
