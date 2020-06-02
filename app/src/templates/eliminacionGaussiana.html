@@ -64,8 +64,10 @@
                 </table>
                 <br>
                 <button type="submit" class="btn btn-success">Enviar</button>
+                <br>
+                <br>
                 {%for i in range (0,n)%}
-                <label>x{{i}}={{resultado[i]}}</label>
+                <label>x{{i}}=</label> <input type="text" value="{{resultado[i]}}" disabled />
                 {%endfor%}
             </form>
         </div>
@@ -116,6 +118,7 @@
                 debugger;
 
                 const matrixTable = document.getElementById('matrix-table');
+                matrixTable.innerHTML = ''
 
                 const matrixSizeInputValue = !isNaN(event.target.value) ? parseInt(event.target.value) : '';
 
@@ -132,6 +135,7 @@
                             const input = document.createElement('input');
                             input.setAttribute('name', i + '-' + j);
                             input.setAttribute('style', 'width: 40px;')
+                            input.setAttribute('placeholder', '0')
 
                             cell.appendChild(input);
                             row.appendChild(cell);
