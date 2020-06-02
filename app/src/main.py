@@ -13,6 +13,7 @@ from metodos.SistemasDeEcuaciones.MetodosDeEliminacion import EliminacionGaussia
 from metodos.SistemasDeEcuaciones.MetodosDeEliminacion import EliminacionGaussianaPivoteoParcial
 from metodos.SistemasDeEcuaciones.MetodosDeEliminacion import EliminacionGaussianaPivoteoTotal
 from metodos.SistemasDeEcuaciones.MetodosDeFactorizacionDirecta import Dolittle
+from metodos.SistemasDeEcuaciones.MetodosDeFactorizacionDirecta import Croult
 app = Flask(__name__)
 
 
@@ -230,11 +231,40 @@ def Dolittle_rout():
 
     resultado = ""
     if request.method == "POST":
+        print(matriz)
+        print(B)
         metodoDol = Dolittle(n, matriz,B)
         resultado = metodoDol.dolittle()
     print(resultado)
     
     return render_template('factorizacionDolittle.html', n=int(n), resultado=resultado)
+@app.route('/Croult', methods=['GET', 'POST'])
+def Croult_rout():
+    
+    n = request.form.get('n')
+    if str(n) == "None":
+        n = 0
+    matriz = np.zeros([int(n), int(n)])
+    B = [] #vector terminos independientes
+    
+    for i in range(0, int(n)):
+        for j in range(0, int(n)+1):
+            nombre = str(i+1) + "-" + str(j+1)
+            valor = request.form.get(nombre)
+            if j == int(n):
+                B.append(int(valor))
+            else:
+                matriz[i, j] = int(valor)
+
+    resultado = ""
+    if request.method == "POST":
+        print(matriz)
+        print(B)
+        metodoCroult = Croult(n, matriz,B)
+        resultado = metodoCroult.croult()
+    print(resultado)
+    
+    return render_template('factorizacionCrout.html', n=int(n), resultado=resultado)
 
 
 app.run(debug=True)

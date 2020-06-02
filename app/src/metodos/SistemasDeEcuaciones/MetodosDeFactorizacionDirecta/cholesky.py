@@ -10,6 +10,35 @@ B = []
 Y = []
 X = []
 
+def inputYverificacion():
+
+    n = int(input("Ingrese el numero de ecuaciones: "))  #Conociendo el numero de ecuaciones, conoceremos las dimensiones de la matriz
+    A = []  
+
+    for i in range(n):
+        A.append([0] * (n))    #Se le agregan n+1 columnas a la matriz por los terminos independientes
+        fila = str(input("Ingrese los valores de la fila " + str(i+1) + " separados por espacio: "))  #El usuario ingresa los coeficientes de la matriz
+        valores = fila.split(" ")
+        for j in range(n):       #Es n+1 por la columna de terminos independientes
+            A [i][j] = float(valores[j])  #Asignamos a la posición correspondiente de la matriz los coeficientes
+
+    B = [0] * (n)
+    columnas = str(input("Ingrese los valores de B separados por espacio: "))
+    val = columnas.split(" ")
+    print(B)
+    for j in range(n):
+        B[j] = float(val[j])
+    print(B)
+
+    for i in range(n):
+        L.append([])
+        U.append([])
+        for j in range(n):
+            L[i].append(0)
+            U[i].append(0)
+
+    conversionL(A, L, U, B, n)
+    
 def imprimirMatriz(l, U, n):
     print("Matriz L")
     for i in range(n):
@@ -104,37 +133,5 @@ def conversionL(A,L,U,B,n):
     imprimirMatriz(L,U,n)
     resolverMatriz(L,U,B,n)
 
-    
-
-def inputYverificacion():
-
-    n = int(input("Ingrese el numero de ecuaciones: "))  #Conociendo el numero de ecuaciones, conoceremos las dimensiones de la matriz
-    A = []  
-
-    for i in range(n):
-        A.append([0] * (n))    #Se le agregan n+1 columnas a la matriz por los terminos independientes
-        fila = str(input("Ingrese los valores de la fila " + str(i+1) + " separados por espacio: "))  #El usuario ingresa los coeficientes de la matriz
-        valores = fila.split(" ")
-        for j in range(n):       #Es n+1 por la columna de terminos independientes
-            A [i][j] = float(valores[j])  #Asignamos a la posición correspondiente de la matriz los coeficientes
-
-    B = [0] * (n)
-    columnas = str(input("Ingrese los valores de B separados por espacio: "))
-    val = columnas.split(" ")
-    print(B)
-    for j in range(n):
-        B[j] = float(val[j])
-    print(B)
-
-    for i in range(m):
-        L.append([])
-        U.append([])
-        for j in range(n):
-            L[i].append(0)
-            U[i].append(0)
-
-    conversionL(A, L, U, B, n)
-
-                
 inputYverificacion()
 

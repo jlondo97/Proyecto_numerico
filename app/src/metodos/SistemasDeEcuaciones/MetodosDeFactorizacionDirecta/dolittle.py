@@ -10,6 +10,10 @@ class Dolittle:
 
     
     def __init__(self, n, A, B):
+        X.clear()
+        U.clear()
+        Z.clear()
+        L.clear()
 
         self.n = n
         self.A = A
