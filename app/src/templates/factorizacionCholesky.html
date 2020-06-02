@@ -33,7 +33,13 @@
                     <hr class="divider my-4" />
                 </div>
                 <div class="col-lg-8 align-self-baseline">
-                    <p class="text-white-75 font-weight-light mb-5"> Toma su nombre del matemático André-Louis Cholesky, quien encontró que una matriz simétrica definida positiva puede ser descompuesta como el producto de una matriz triangular inferior y la traspuesta de la matriz triangular inferior. La matriz triangular inferior es el triángulo de Cholesky de la matriz original positiva definida. El resultado de Cholesky ha sido extendido a matrices con entradas complejas. Es una manera de resolver sistemas de ecuaciones matriciales y se deriva de la factorización LU con una pequeña variación.</p>
+                    <p class="text-white-75 font-weight-light mb-5"> Toma su nombre del matemático André-Louis Cholesky,
+                        quien encontró que una matriz simétrica definida positiva puede ser descompuesta como el
+                        producto de una matriz triangular inferior y la traspuesta de la matriz triangular inferior. La
+                        matriz triangular inferior es el triángulo de Cholesky de la matriz original positiva definida.
+                        El resultado de Cholesky ha sido extendido a matrices con entradas complejas. Es una manera de
+                        resolver sistemas de ecuaciones matriciales y se deriva de la factorización LU con una pequeña
+                        variación.</p>
                     <a class="btn btn-primary btn-xl js-scroll-trigger" href="#sistemas de ecuaciones">Insertar
                         parámetros</a>
                 </div>
@@ -61,8 +67,10 @@
                 </table>
                 <br>
                 <button type="submit" class="btn btn-success">Enviar</button>
+                <br>
+                <br>
                 {%for i in range (0,n)%}
-                <label>x{{i}}={{resultado[i]}}</label>
+                <label>x{{i}}=</label> <input type="text" value="{{resultado[i]}}" disabled />
                 {%endfor%}
             </form>
         </div>
@@ -113,6 +121,7 @@
                 debugger;
 
                 const matrixTable = document.getElementById('matrix-table');
+                matrixTable.innerHTML = ''
 
                 const matrixSizeInputValue = !isNaN(event.target.value) ? parseInt(event.target.value) : '';
 
@@ -129,6 +138,7 @@
                             const input = document.createElement('input');
                             input.setAttribute('name', i + '-' + j);
                             input.setAttribute('style', 'width: 40px;')
+                            input.setAttribute('placeholder', '0')
 
                             cell.appendChild(input);
                             row.appendChild(cell);

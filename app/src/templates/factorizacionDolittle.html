@@ -33,7 +33,14 @@
                     <hr class="divider my-4" />
                 </div>
                 <div class="col-lg-8 align-self-baseline">
-                    <p class="text-white-75 font-weight-light mb-5">Con el método de factorización Doolittle, se pretende, mediante la descomposición de la matriz de coeficientes A, en L y U, dar solución a un sistema de ecuaciones lineales. Doolittle propone plantear una matriz triangular inferior L cuya diagonal este llena de unos (1), y trabajar con una matriz triangular superior U, con todas sus variables Uij desconocidas. De esta manera, una vez planteadas las matrices L y U, luego de hallar sus coeficientes, de procede a dar solución al sistema de ecuaciones, hallando inicialmente mediante sustitución progresiva las n variables y, y posteriormente mediante sustitución regresiva hallar los valores de las incógnitas del sistema de ecuaciones.</p>
+                    <p class="text-white-75 font-weight-light mb-5">Con el método de factorización Doolittle, se
+                        pretende, mediante la descomposición de la matriz de coeficientes A, en L y U, dar solución a un
+                        sistema de ecuaciones lineales. Doolittle propone plantear una matriz triangular inferior L cuya
+                        diagonal este llena de unos (1), y trabajar con una matriz triangular superior U, con todas sus
+                        variables Uij desconocidas. De esta manera, una vez planteadas las matrices L y U, luego de
+                        hallar sus coeficientes, de procede a dar solución al sistema de ecuaciones, hallando
+                        inicialmente mediante sustitución progresiva las n variables y, y posteriormente mediante
+                        sustitución regresiva hallar los valores de las incógnitas del sistema de ecuaciones.</p>
                     <a class="btn btn-primary btn-xl js-scroll-trigger" href="#sistemas de ecuaciones">Insertar
                         parámetros</a>
                 </div>
@@ -61,8 +68,10 @@
                 </table>
                 <br>
                 <button type="submit" class="btn btn-success">Enviar</button>
+                <br>
+                <br>
                 {%for i in range (0,n)%}
-                <label>x{{i}}={{resultado[i]}}</label>
+                <label>x{{i}}=</label> <input type="text" value="{{resultado[i]}}" disabled />
                 {%endfor%}
             </form>
         </div>
@@ -113,6 +122,7 @@
                 debugger;
 
                 const matrixTable = document.getElementById('matrix-table');
+                matrixTable.innerHTML = ''
 
                 const matrixSizeInputValue = !isNaN(event.target.value) ? parseInt(event.target.value) : '';
 
@@ -129,6 +139,7 @@
                             const input = document.createElement('input');
                             input.setAttribute('name', i + '-' + j);
                             input.setAttribute('style', 'width: 40px;')
+                            input.setAttribute('placeholder', '0')
 
                             cell.appendChild(input);
                             row.appendChild(cell);

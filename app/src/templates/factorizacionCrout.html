@@ -33,7 +33,10 @@
                     <hr class="divider my-4" />
                 </div>
                 <div class="col-lg-8 align-self-baseline">
-                    <p class="text-white-75 font-weight-light mb-5"> El método de Crout hace una suposición muy similar a la de Doolittle, la diferencia radica en que son los elementos de la diagonal de la matriz U (U(i,i)) los que serán llenados con 1. El resto de operaciones algebraicas y matriciales es del mismo modo.</p>
+                    <p class="text-white-75 font-weight-light mb-5"> El método de Crout hace una suposición muy similar
+                        a la de Doolittle, la diferencia radica en que son los elementos de la diagonal de la matriz U
+                        (U(i,i)) los que serán llenados con 1. El resto de operaciones algebraicas y matriciales es del
+                        mismo modo.</p>
                     <a class="btn btn-primary btn-xl js-scroll-trigger" href="#sistemas de ecuaciones">Insertar
                         parámetros</a>
                 </div>
@@ -61,8 +64,10 @@
                 </table>
                 <br>
                 <button type="submit" class="btn btn-success">Enviar</button>
+                <br>
+                <br>
                 {%for i in range (0,n)%}
-                <label>x{{i}}={{resultado[i]}}</label>
+                <label>x{{i}}=</label> <input type="text" value="{{resultado[i]}}" disabled />
                 {%endfor%}
             </form>
         </div>
@@ -113,6 +118,7 @@
                 debugger;
 
                 const matrixTable = document.getElementById('matrix-table');
+                matrixTable.innerHTML = ''
 
                 const matrixSizeInputValue = !isNaN(event.target.value) ? parseInt(event.target.value) : '';
 
@@ -129,6 +135,7 @@
                             const input = document.createElement('input');
                             input.setAttribute('name', i + '-' + j);
                             input.setAttribute('style', 'width: 40px;')
+                            input.setAttribute('placeholder', '0')
 
                             cell.appendChild(input);
                             row.appendChild(cell);
