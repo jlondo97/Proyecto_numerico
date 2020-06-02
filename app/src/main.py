@@ -145,7 +145,7 @@ def metodoNewton_rout():
         metodonewton = MetodoNewton(x0, tolerancia, iteraciones, f)
         resultado = metodonewton.metodoNewton()
 
-        return render_template('newton.html', resultado=resultado)
+    return render_template('newton.html',resultado=resultado)
 
 
 # ------------------------- Sistemas de ecuaciones ----------
@@ -211,6 +211,8 @@ def pivoteo_total_rout():
 
     return render_template('pivoteoTotal.html', n=int(n), resultado=resultado)
 
+# Métodos para factorización Directa de matrices----------------#
+
 @app.route('/Dolittle', methods=['GET', 'POST'])
 def Dolittle_rout():
 
@@ -238,6 +240,7 @@ def Dolittle_rout():
     print(resultado)
     
     return render_template('factorizacionDolittle.html', n=int(n), resultado=resultado)
+
 @app.route('/Croult', methods=['GET', 'POST'])
 def Croult_rout():
     
@@ -265,6 +268,74 @@ def Croult_rout():
     print(resultado)
     
     return render_template('factorizacionCrout.html', n=int(n), resultado=resultado)
+
+@app.route('/cholesky', methods=['GET', 'POST'])
+def cholesky_rout():
+    
+    
+    return render_template('Cholesky.html')
+
+# Métodos Iterativos----------------#
+
+@app.route('/jacobi', methods=['GET', 'POST'])
+def jacobi_rout():
+    
+    
+    return render_template('jacobi.html')
+
+@app.route('/gaussSeidel', methods=['GET', 'POST'])
+def gauss_seidel_rout():
+    
+    
+    return render_template('gaussSeidel.html')
+
+# Interpolacion----------------#
+
+@app.route('/lagrange', methods=['GET', 'POST'])
+def lagrange_rout():
+    
+    
+    return render_template('interpolacionLagrange.html')
+
+@app.route('/neville', methods=['GET', 'POST'])
+def neville_rout():
+    
+    
+    return render_template('interpolacionNeville.html')
+
+@app.route('/newtonConDiferenciasDivididas', methods=['GET', 'POST'])
+def newton_diferencias_divididas_rout():
+    
+    
+    return render_template('newtonConDiferenciasDivididas.html')
+
+
+@app.route('/splineLineal', methods=['GET', 'POST'])
+def spline_lineal_rout():
+    
+    
+    return render_template('interpolacionSplineLineal.html')
+
+@app.route('/splineCuadratico', methods=['GET', 'POST'])
+def spline_cuadrático_rout():
+    
+    
+    return render_template('interpolacionSplineCuadratico.html')
+
+@app.route('/splineCubico', methods=['GET', 'POST'])
+def spline_cubico_rout():
+    
+    
+    return render_template('interpolacionSplineCubico.html')
+
+@app.route('/index', methods=['GET', 'POST'])
+def index_rout():
+    
+    
+    return render_template('index.html')
+
+
+
 
 
 app.run(debug=True)
