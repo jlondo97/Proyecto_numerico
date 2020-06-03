@@ -1,7 +1,8 @@
 from flask import *
 from flask import render_template
-from flask import Flask
+from flask import Flask, make_response, jsonify
 import numpy as np
+import json
 from metodos.EcuacionesDeUnaVariable.MetodosPorIntervalos import BusquedasIncrementales
 from metodos.EcuacionesDeUnaVariable.MetodosPorIntervalos import MetodoBiseccion
 from metodos.EcuacionesDeUnaVariable.MetodosPorIntervalos import ReglaFalsa
@@ -41,6 +42,7 @@ def busquedasIncrementales_rout():
 
     return render_template('busquedasIncrementales.html', resultado=resultado)
 
+
 # -------------Metodo de biseccion accediendo a valores del front y renderizando ----------
 @app.route('/biseccion', methods=['GET', 'POST'])  # Decorador o wrap
 def metodoBiseccion_rout():
@@ -50,14 +52,26 @@ def metodoBiseccion_rout():
     tolerancia = request.form.get('tolerancia')
     iteraciones = request.form.get('iteracion')
     resultado = ""
+    tabla = ""
+    valores = ""
 
     if request.method == 'POST':
         # print(funcion, extremo_superior,extremo_inferior,tolerancia,iteraciones)
         metodoBiseccion = MetodoBiseccion(
             extremo_inferior, extremo_superior, tolerancia, iteraciones, funcion)
         resultado = metodoBiseccion.metodoBiseccion()
+        tabla = metodoBiseccion.vector
+        valores = metodoBiseccion.valores
 
-    return render_template('biseccion.html', resultado=resultado)
+    return render_template('biseccion.html', resultado=resultado, tabla=tabla, valores=valores)
+
+
+@app.route('/get_data_Biseccion')
+def get_data_Biseccion():
+    labels = ['Africa', 'Asia', 'Europe', 'Latin America', 'North America']
+    data = [5578, 5267, 734, 784, 433]
+    return make_response(jsonify({'payload': json.dumps({'data': data, 'labels': labels})}))
+
 
 # -Metodo de Regla falsa renderizando y procesando valores
 
@@ -211,6 +225,7 @@ def pivoteo_total_rout():
 
     return render_template('pivoteoTotal.html', n=int(n), resultado=resultado)
 
+
 @app.route('/Dolittle', methods=['GET', 'POST'])
 def Dolittle_rout():
 
@@ -218,8 +233,8 @@ def Dolittle_rout():
     if str(n) == "None":
         n = 0
     matriz = np.zeros([int(n), int(n)])
-    B = [] #vector terminos independientes
-    
+    B = []  # vector terminos independientes
+
     for i in range(0, int(n)):
         for j in range(0, int(n)+1):
             nombre = str(i+1) + "-" + str(j+1)
@@ -233,20 +248,22 @@ def Dolittle_rout():
     if request.method == "POST":
         print(matriz)
         print(B)
-        metodoDol = Dolittle(n, matriz,B)
+        metodoDol = Dolittle(n, matriz, B)
         resultado = metodoDol.dolittle()
     print(resultado)
-    
+
     return render_template('factorizacionDolittle.html', n=int(n), resultado=resultado)
+
+
 @app.route('/Croult', methods=['GET', 'POST'])
 def Croult_rout():
-    
+
     n = request.form.get('n')
     if str(n) == "None":
         n = 0
     matriz = np.zeros([int(n), int(n)])
-    B = [] #vector terminos independientes
-    
+    B = []  # vector terminos independientes
+
     for i in range(0, int(n)):
         for j in range(0, int(n)+1):
             nombre = str(i+1) + "-" + str(j+1)
@@ -260,10 +277,10 @@ def Croult_rout():
     if request.method == "POST":
         print(matriz)
         print(B)
-        metodoCroult = Croult(n, matriz,B)
+        metodoCroult = Croult(n, matriz, B)
         resultado = metodoCroult.croult()
     print(resultado)
-    
+
     return render_template('factorizacionCrout.html', n=int(n), resultado=resultado)
 
 

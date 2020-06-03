@@ -13,6 +13,8 @@ class MetodoBiseccion:
         self.tolerancia = tolerancia
         self.iteraciones = iteraciones
         self.funcion = funcion
+        self.vector = []
+        self.valores = []
 
     def metodoBiseccion(self):
         self.xi = float(self.xi)
@@ -22,6 +24,7 @@ class MetodoBiseccion:
 
         f = parse_expr(self.funcion)
         x = Symbol('x')
+        self.valores.append([10, 20, 30, 40])
         fxi = f.subs(x, self.xi)
         fxs = f.subs(x, self.xs)
         if fxi == 0:
@@ -41,11 +44,16 @@ class MetodoBiseccion:
             cont = 1
             fxm = f.subs(x, xm)
             error = self.tolerancia + 1
+            self.vector.append([str(cont), str(self.xs), str(
+                xm), str(self.xi), str(fxm), str(error)])
             while fxm != 0 and error > self.tolerancia and cont < self.iteraciones:
                 if fxi * fxm < 0:
                     self.xs = xm
                     fxs = f.subs(x, self.xs)
+                    self.vector.append([str(cont), str(self.xs), str(
+                        xm), str(self.xi), str(fxm), str(error)])
                 else:
+
                     self.xi = xm
                     fxi = f.subs(x, self.xi)
 
@@ -54,6 +62,8 @@ class MetodoBiseccion:
                 fxm = f.subs(x, xm)
                 error = abs(xm - xaux)
                 cont += 1
+                self.vector.append([str(cont), str(self.xs), str(
+                    xm), str(self.xi), str(fxm), str(error)])
 
             if fxm == 0:
                 mensaje = (repr(xm) + " es una raiz")
@@ -65,4 +75,3 @@ class MetodoBiseccion:
             else:
                 mensaje = ("Excedio el numero de iteraciones posible")
                 return mensaje
-

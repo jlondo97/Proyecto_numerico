@@ -11,6 +11,11 @@
     <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='styles.css')}}" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+    <!--Char.js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
@@ -20,6 +25,14 @@
         rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{{url_for('static', filename='styles.css')}}" rel="stylesheet" />
+
+    <style>
+        canvas {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -53,35 +66,86 @@
                         <hr class="divider light my-4" />
                         <input type="text" class="form-control" name="funcion" placeholder="Función" required>
                         <br>
-                        <input type="text" class="form-control" name = "ei" placeholder="Extremo Inferior" required>
+                        <input type="text" class="form-control" name="ei" placeholder="Extremo Inferior" required>
                         <br>
-                        <input type="text" class="form-control" name = "es" placeholder="Extremo Superior" required>
+                        <input type="text" class="form-control" name="es" placeholder="Extremo Superior" required>
                         <br>
-                        <input type="text" class="form-control" name = "tolerancia" placeholder="Tolerancia" required>
+                        <input type="text" class="form-control" name="tolerancia" placeholder="Tolerancia" required>
                         <br>
-                        <input type="text" class="form-control" name = "iteracion" placeholder="Máximo de Iteraciones" required>
+                        <input type="text" class="form-control" name="iteracion" placeholder="Máximo de Iteraciones"
+                            required>
                         <br>
                         <button type="submit" class="btn btn-primary">Enviar</button>
                         <hr class="divider light my-4" />
-                            <input type="text" class="form-control" name="Iteraciones" placeholder="Resultado: {{resultado}} ">
+
                     </div>
                 </div>
+        </div>
+        </form>
+    </section>
+
+    <!-- Contact-->
+    <section class="page-section bg-dark text-white" id="contact">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="text-white mt-0">Resultado</h2>
+                    <hr class="divider light my-4" />
+                    <input type="text" class="form-control" name="Iteraciones" placeholder="{{resultado}} " disabled>
+                </div>
             </div>
-           </form> 
-        </section>
-        
-        <!-- Contact-->
-        <section class="page-section bg-dark text-white" id="contact">
-            <div class="container">
+        </div>
+        <br>
+        <br>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="text-white mt-0">Tabla de Ejecucion</h2>
+                    <hr class="divider light my-4" />
+                    <div>
+                        <table class="table table-sm table-dark">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Iteraciones</th>
+                                    <th scope="col">Xi</th>
+                                    <th scope="col">Xsup</th>
+                                    <th scope="col">Xm</th>
+                                    <th scope="col">F(Xm)</th>
+                                    <th scope="col">Error</th>
+                                </tr>
+                                {%for line in tabla%}
+                                <tr>
+                                    {%for data in line%}
+                                    <td>{{data}}</td>
+                                    {%endfor%}
+                                </tr>
+                                {%endfor%}
+
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        </form>
+    </section>
+    <section class="page-section bg-warning" id="sistemas de ecuaciones">
+        <div class="container">
+            <form method="POST">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 text-center">
-                        <h2 class="text-white mt-0">Resultado</h2>
+                        <h2 class="text-white mt-0">Grafico</h2>
                         <hr class="divider light my-4" />
-                        <input type="text" class="form-control" name="Iteraciones"
-                            placeholder="la raiz de la función es:{{resultado}} ">
+                        <div style="width:auto;" class="card">
+                            <canvas id="canvas"></canvas>
+
+
+                        </div>
+
+
                     </div>
                 </div>
-            </div>
+        </div>
         </form>
     </section>
 
@@ -122,7 +186,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
     <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
+    <script src="{{url_for('static', filename='javascript/Grafica.js')}}?v=1" type="text/javascript">
+
+
+    </script>
+
+
 </body>
 
 </html>
