@@ -16,6 +16,7 @@ from metodos.SistemasDeEcuaciones.MetodosDeEliminacion import EliminacionGaussia
 from metodos.SistemasDeEcuaciones.MetodosDeFactorizacionDirecta import Dolittle
 from metodos.SistemasDeEcuaciones.MetodosDeFactorizacionDirecta import Croult
 from metodos.SistemasDeEcuaciones.MetodosDeFactorizacionDirecta import Cholesky
+from metodos.SistemasDeEcuaciones.MetodosIterativos import MetodoJacobi
 app = Flask(__name__)
 
 
@@ -317,8 +318,33 @@ def cholesky_rout():
 
 @app.route('/jacobi', methods=['GET', 'POST'])
 def jacobi_rout():
+    tolerancia = 2.6e-6
+    niter = 16
+    X = [0.0, 0.0, 0.0, 0.0]
+    n = request.form.get('n')
+    if str(n) == "None":
+        n = 0
+    matriz = np.zeros([int(n), int(n)])
+    B = []  # vector terminos independientes
 
-    return render_template('jacobi.html')
+    for i in range(0, int(n)):
+        for j in range(0, int(n)+1):
+            nombre = str(i+1) + "-" + str(j+1)
+            valor = request.form.get(nombre)
+            if j == int(n):
+                B.append(float(valor))
+            else:
+                matriz[i, j] = float(valor)
+
+    resultado = ""
+    if request.method == "POST":
+        print(matriz)
+        print(B)
+        jacobi = MetodoJacobi(n, matriz, B, X, niter, tolerancia)
+        resultado = jacobi.metodoJacobi()
+    print(resultado)
+
+    return render_template('Cholesky.html', n= int(n), resultado = resultado)
 
 
 @app.route('/gaussSeidel', methods=['GET', 'POST'])
