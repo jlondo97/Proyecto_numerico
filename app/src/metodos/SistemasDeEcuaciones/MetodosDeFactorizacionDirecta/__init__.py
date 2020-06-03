@@ -1,2 +1,3 @@
 from metodos.SistemasDeEcuaciones.MetodosDeFactorizacionDirecta.dolittle import *
 from metodos.SistemasDeEcuaciones.MetodosDeFactorizacionDirecta.croult import *
+from metodos.SistemasDeEcuaciones.MetodosDeFactorizacionDirecta.cholesky import *

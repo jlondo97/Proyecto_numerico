@@ -15,6 +15,7 @@ from metodos.SistemasDeEcuaciones.MetodosDeEliminacion import EliminacionGaussia
 from metodos.SistemasDeEcuaciones.MetodosDeEliminacion import EliminacionGaussianaPivoteoTotal
 from metodos.SistemasDeEcuaciones.MetodosDeFactorizacionDirecta import Dolittle
 from metodos.SistemasDeEcuaciones.MetodosDeFactorizacionDirecta import Croult
+from metodos.SistemasDeEcuaciones.MetodosDeFactorizacionDirecta import Cholesky
 app = Flask(__name__)
 
 
@@ -176,7 +177,7 @@ def eliminacion_gaussiana_rout():
         for j in range(0, int(n)+1):
             nombre = str(i+1) + "-" + str(j+1)
             valor = request.form.get(nombre)
-            matriz[i, j] = int(valor)
+            matriz[i, j] = float(valor)
     resultado = ""
     if request.method == "POST":
 
@@ -197,7 +198,7 @@ def pivoteo_parcial_rout():
         for j in range(0, int(n)+1):
             nombre = str(i+1) + "-" + str(j+1)
             valor = request.form.get(nombre)
-            matriz[i, j] = int(valor)
+            matriz[i, j] = float(valor)
     resultado = ""
     if request.method == "POST":
         gaussParcial = EliminacionGaussianaPivoteoParcial(n, matriz)
@@ -217,7 +218,7 @@ def pivoteo_total_rout():
         for j in range(0, int(n)+1):
             nombre = str(i+1) + "-" + str(j+1)
             valor = request.form.get(nombre)
-            matriz[i, j] = int(valor)
+            matriz[i, j] = float(valor)
     resultado = ""
     if request.method == "POST":
         gaussTotal = EliminacionGaussianaPivoteoTotal(n, matriz)
@@ -240,9 +241,9 @@ def Dolittle_rout():
             nombre = str(i+1) + "-" + str(j+1)
             valor = request.form.get(nombre)
             if j == int(n):
-                B.append(int(valor))
+                B.append(float(valor))
             else:
-                matriz[i, j] = int(valor)
+                matriz[i, j] = float(valor)
 
     resultado = ""
     if request.method == "POST":
@@ -269,9 +270,9 @@ def Croult_rout():
             nombre = str(i+1) + "-" + str(j+1)
             valor = request.form.get(nombre)
             if j == int(n):
-                B.append(int(valor))
+                B.append(float(valor))
             else:
-                matriz[i, j] = int(valor)
+                matriz[i, j] = float(valor)
 
     resultado = ""
     if request.method == "POST":
@@ -286,8 +287,30 @@ def Croult_rout():
 
 @app.route('/cholesky', methods=['GET', 'POST'])
 def cholesky_rout():
+    n = request.form.get('n')
+    if str(n) == "None":
+        n = 0
+    matriz = np.zeros([int(n), int(n)])
+    B = []  # vector terminos independientes
 
-    return render_template('Cholesky.html')
+    for i in range(0, int(n)):
+        for j in range(0, int(n)+1):
+            nombre = str(i+1) + "-" + str(j+1)
+            valor = request.form.get(nombre)
+            if j == int(n):
+                B.append(float(valor))
+            else:
+                matriz[i, j] = float(valor)
+
+    resultado = ""
+    if request.method == "POST":
+        print(matriz)
+        print(B)
+        metodoCholesky = Cholesky(n, matriz, B)
+        resultado = metodoCholesky.cholesky()
+    print(resultado)
+
+    return render_template('Cholesky.html',n=int(n), resultado=resultado)
 
 # Métodos Iterativos----------------#
 
