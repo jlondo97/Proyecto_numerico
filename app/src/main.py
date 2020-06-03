@@ -17,6 +17,7 @@ from metodos.SistemasDeEcuaciones.MetodosDeFactorizacionDirecta import Dolittle
 from metodos.SistemasDeEcuaciones.MetodosDeFactorizacionDirecta import Croult
 from metodos.SistemasDeEcuaciones.MetodosDeFactorizacionDirecta import Cholesky
 from metodos.SistemasDeEcuaciones.MetodosIterativos import MetodoJacobi
+from metodos.SistemasDeEcuaciones.MetodosIterativos import MetodoGaussSeidel
 app = Flask(__name__)
 
 
@@ -343,14 +344,40 @@ def jacobi_rout():
         jacobi = MetodoJacobi(n, matriz, B, X, niter, tolerancia)
         resultado = jacobi.metodoJacobi()
     print(resultado)
-
+    #cambiar plantilla de jacobi  y cambiar abajo la direccion a esa plantilla
     return render_template('Cholesky.html', n= int(n), resultado = resultado)
 
 
 @app.route('/gaussSeidel', methods=['GET', 'POST'])
-def gauss_seidel_rout():
+def GaussSeidel_rout():
+    tolerancia = 2.6e-30
+    niter = 8
+    X = [0.0, 0.0, 0.0, 0.0]
+    n = request.form.get('n')
+    if str(n) == "None":
+        n = 0
+    matriz = np.zeros([int(n), int(n)])
+    B = []  # vector terminos independientes
 
-    return render_template('gaussSeidel.html')
+    for i in range(0, int(n)):
+        for j in range(0, int(n)+1):
+            nombre = str(i+1) + "-" + str(j+1)
+            valor = request.form.get(nombre)
+            if j == int(n):
+                B.append(float(valor))
+            else:
+                matriz[i, j] = float(valor)
+
+    resultado = ""
+    if request.method == "POST":
+        print(matriz)
+        print(B)
+        gaussSed = MetodoGaussSeidel(n, matriz, B, X, niter, tolerancia)
+        resultado = gaussSed.metodoGaussSeidel()
+    print(resultado)
+    #cambiar plantilla de gauss y cambiar abajo la direccion a esa plantilla
+    return render_template('Cholesky.html', n= int(n), resultado = resultado) 
+
 
 # Interpolacion----------------#
 
