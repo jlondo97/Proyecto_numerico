@@ -34,7 +34,7 @@ class ReglaFalsa:
             mensaje = (repr(self.xs) + " es una raiz")
 
         elif fxi * fxs < 0:
-            xm = self.xi - (fxi * (self.xs - self.xi) / fxs - fxi)
+            xm = self.xi - (fxi) * (self.xi - self.xs) / (fxi - fxs)
             fxm = f.subs(x, xm)
             contador = 1
             error = self.tolerancia + 1
@@ -43,9 +43,10 @@ class ReglaFalsa:
                     self.xs = xm
                     fxs = f.subs(x, self.xs)
                 else:
-                    self.xi = xmfxi = f.subs(x, self.xi)
+                    self.xi = xm
+                    fxi = f.subs(x, self.xi)
                 xaux = xm
-                xm = self.xi - (fxi * (self.xs - self.xi) / fxs - fxi)
+                xm = self.xi - (fxi) * (self.xi - self.xs) / (fxi - fxs)
                 fxm = f.subs(x, xm)
                 error = abs(xm - xaux)
                 contador = contador + 1
@@ -57,7 +58,7 @@ class ReglaFalsa:
                     xm) + " se aproxima a una raíz de la función con una tolerancia de: " + str(repr(self.tolerancia)))
                 return mensaje
             else:
-                mensaje = ("Excedió el número de iteraciones permitidas")
+                mensaje = ("No se encontro raiz con esa aproximación")
                 return mensaje
         else:
             mensaje = (

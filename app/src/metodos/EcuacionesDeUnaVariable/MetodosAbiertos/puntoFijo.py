@@ -25,23 +25,25 @@ class PuntoFijo:
 
         x = Symbol('x')
         fx = f.subs(x,self.xa)
+        print(fx)
         cont = 0
         errorAbs = self.tolerancia + 1
         while fx != 0 and errorAbs > self.tolerancia and cont < self.iteraciones:
             xn = g.subs(x,self.xa)
+            xn = float(xn)
             fx = f.subs(x,xn)
             errorAbs = abs(xn - self.xa)
          
-            xa = xn
+            self.xa = xn
             cont += 1
 
         if fx == 0:
-            mensaje = (str(xa) + " es una raiz")
+            mensaje = (str(self.xa) + " es una raiz")
             return mensaje
         elif errorAbs < self.tolerancia:
-            mensaje = (str(xa) + " se aproxima a una raiz de la función, con una tolerancia de: " + str(self.tolerancia))
+            mensaje = (str(self.xa) + " se aproxima a una raiz de la función, con una tolerancia de: " + str(self.tolerancia))
             return mensaje
         else:
-            mensaje = ("Excedio el numero de iteraciones posible")
+            mensaje = ("No hay raiz con esos parametros")
             return mensaje
 

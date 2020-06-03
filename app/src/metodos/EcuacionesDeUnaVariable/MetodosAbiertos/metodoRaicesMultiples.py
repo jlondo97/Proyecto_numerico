@@ -13,8 +13,7 @@ class MetodoRaicesMultiples:
         self.iteraciones = iteraciones
         self.tolerancia = tolerancia
         self.f = f
-       # self.df = df
-       # self.d2f = d2f
+       
 
     def metodoRaicesMultiples(self):
         self.x0 = float(self.x0)
@@ -34,27 +33,27 @@ class MetodoRaicesMultiples:
         denominador = dfx**2 - (fx*d2fx)
         
         while fx != 0 and errorAbs > self.tolerancia and denominador != 0 and cont < self.iteraciones:
-            x1 = self.x0 - fx*dfx/denominador
+            x1 = self.x0 - fx*dfx/(dfx**2 - (fx*d2fx))
             fx = f.subs(x,x1)
             dfx = df.subs(x,x1)
-            d2fx = d2fx.subs(x,x1)
+            d2fx = d2f.subs(x,x1)
             errorAbs = abs(x1 - self.x0)
            #errorRel = errorAbs/x1
-            x0 = x1
+            self.x0 = x1
             cont += 1
         
 
         if fx == 0:
-            mensaje = (str(x0) + " es una raiz")
+            mensaje = (str(self.x0) + " es una raiz")
             return mensaje
         elif errorAbs < self.tolerancia:
-            mensaje = (str(x0) + " se aproxima a una raiz de la función, con una tolerancia de: " + str(self.tolerancia))
+            mensaje = (str(self.x0) + " se aproxima a una raiz de la función, con una tolerancia de: " + str(self.tolerancia))
             return mensaje
         elif dfx == 0:
-            mensaje = (str(x0) + " Es una raiz multiple simple")
+            mensaje = (str(self.x0) + " Es una raiz multiple simple")
             return
         elif d2fx == 0:
-            mensaje = (str(x0) + " Es una raiz multiple de multiplicidad 2")
+            mensaje = (str(self.x0) + " Es una raiz multiple de multiplicidad 2")
             return mensaje
         else:
             mensaje = ("Excedio el numero de iteraciones posible")

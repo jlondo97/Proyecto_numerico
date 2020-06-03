@@ -34,22 +34,22 @@ class MetodoSecante:
                 x2 = self.x1 - fx1*(self.x1-self.x0)/denominador
                 errorAbs = abs(x2 - self.x1)
                 #errorRel = errorAbs/x2
-                #x0 = self.x1
+                self.x0 = self.x1
                 fx0 = fx1
-                x1 = x2
-                fx1 = f.subs(x,x1)
+                self.x1 = x2
+                fx1 = f.subs(x,self.x1)
                 denominador = fx1 - fx0
                 cont += 1
 
 
             if fx1 == 0:
-                mensaje = (str(x1) + " es una raiz")
+                mensaje = (str(self.x1) + " es una raiz")
                 return mensaje
             elif errorAbs < self.tolerancia:
-                mensaje = (str(x1) + " se aproxima a una raiz de la función, con una tolerancia de: " + str(self.tolerancia))
+                mensaje = (str(self.x1) + " se aproxima a una raiz de la función, con una tolerancia de: " + str(self.tolerancia))
                 return mensaje
             elif denominador == 0:
-                mensaje = ("Hay una raiz multiple en " + str(x1))
+                mensaje = ("Hay una raiz multiple en " + str(self.x1))
                 return mensaje
             else:
                 mensaje = ("Excedio el numero de iteraciones posible")

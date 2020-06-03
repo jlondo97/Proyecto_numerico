@@ -42,7 +42,7 @@ class BusquedasIncrementales:
                 return mensaje
             elif fx0 * fx1 < 0:
                 mensaje = ("Hay una raiz entre: " +
-                           str(x0) + " and " + str(x1))
+                           str(self.x0) + " and " + str(x1))
                 return mensaje
             else:
                 mensaje = ("Excedio el numero de iteraciones posible")
