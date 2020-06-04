@@ -2,6 +2,7 @@ from __future__ import division
 from sympy import *
 from sympy.parsing.sympy_parser import parse_expr
 
+
 class MetodoNewton:
     f = Function('fx')
     df = Function('dfx')
@@ -11,6 +12,7 @@ class MetodoNewton:
         self.iteraciones = iteraciones
         self.tolerancia = tolerancia
         self.f = f
+        self.vector = []
 
     def metodoNewton(self):
 
@@ -26,6 +28,8 @@ class MetodoNewton:
         dfx = df.subs(x, self.x0)
         cont = 0
         errorAbs = self.tolerancia + 1
+        self.vector.append(
+            [str(cont), str(self.x0), str(fx), str(dfx), str(0)])
         #print( str(cont) + "|" + str(x0) + "|" + str(fx) + "|" + str(dfx) + "\n")
         while fx != 0 and errorAbs > self.tolerancia and dfx != 0 and cont < self.iteraciones:
             x1 = self.x0 - fx/dfx
@@ -35,6 +39,8 @@ class MetodoNewton:
             errorRel = errorAbs/x1
             self.x0 = x1
             cont += 1
+            self.vector.append([str(cont), str(self.x0),
+                                str(fx), str(dfx), str(errorRel)])
             #print(str(cont) + "|" + str(x0) + "|" + str(fx) + "|" + str(dfx) + "|" + str(errorAbs) + "|" + str(errorRel) + "\n")
 
         if fx == 0:

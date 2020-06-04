@@ -15,6 +15,7 @@ class MetodoBiseccion:
         self.funcion = funcion
         self.vector = []
         self.valores = []
+        self.labels = []
 
     def metodoBiseccion(self):
         self.xi = float(self.xi)
@@ -24,7 +25,8 @@ class MetodoBiseccion:
 
         f = parse_expr(self.funcion)
         x = Symbol('x')
-        self.valores.append([10, 20, 30, 40])
+        self.valores.append([-5, 20, 30, 40, 50])
+        self.labels.append([1, 2, 3, 4, 5])
         fxi = f.subs(x, self.xi)
         fxs = f.subs(x, self.xs)
         if fxi == 0:
