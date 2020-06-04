@@ -12,6 +12,7 @@ class MetodoJacobi:
         self.x0 = x0
         self.niter = niter
         self.tolerancia = tolerancia
+        self.vector = []
 
 # def recolectarDatos():
 #     n = int(input("Ingrese el numero de ecuaciones: "))
@@ -45,12 +46,14 @@ class MetodoJacobi:
         x1 = []
         #print("\nOrden de los datos: n, x1, x2, x3, ... xn, dispersion " )
         #print(str(contador) + "    " + str(self.x0) + "\n")
+        self.vector.append([str(contador), str(self.x0), str(dispersion)])
         while dispersion > self.tolerancia and contador < self.niter:
             x1 = calcularNuevoJacobi(self.x0, self.n, self.b, self.A)
             dispersion = norma(x1, self.x0, self.n)
             self.x0 = x1
             contador += 1
             #print(str(contador) + "   " + str(self.x0) + "   " + str(dispersion) + "\n")
+            self.vector.append([str(contador), str(self.x0), str(dispersion)])
 
         if dispersion < self.tolerancia:
             return(str(x1) + " es una aproximación con una tolerancia: " + str(self.tolerancia))
