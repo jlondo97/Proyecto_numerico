@@ -336,12 +336,13 @@ def cholesky_rout():
 
 # Métodos Iterativos----------------#
 
-
+# Jacobi
 @app.route('/jacobi', methods=['GET', 'POST'])
 def jacobi_rout():
     tolerancia = request.form.get('tolerancia')
     niter = request.form.get('iteracion')
     n = request.form.get('n')
+    tabla = []
     x = []
     if str(n) == "None":
         n = 0
@@ -366,22 +367,24 @@ def jacobi_rout():
     if request.method == "POST":
         jacobi = MetodoJacobi(n, matriz, B, x, niter, tolerancia)
         resultado = jacobi.metodoJacobi()
+        tabla = jacobi.vector
 
     # cambiar plantilla de jacobi  y cambiar abajo la direccion a esa plantilla
-    return render_template('jacobi.html', n=int(n), resultado=resultado)
+    return render_template('jacobi.html', n=int(n), resultado=resultado, tabla=tabla)
 
-
+# --------Gauss seidel
 @app.route('/gaussSeidel', methods=['GET', 'POST'])
 def GaussSeidel_rout():
     tolerancia = request.form.get('tolerancia')
     niter = request.form.get('iteracion')
     n = request.form.get('n')
+    tabla = []
+
     x = []
 
     if str(n) == "None":
         n = 0
     matriz = np.zeros([int(n), int(n)])
-    
 
     B = []  # vector terminos independientes
 
@@ -401,15 +404,16 @@ def GaussSeidel_rout():
 
     resultado = ""
     if request.method == "POST":
-        
+
         if tolerancia == "None":
             tolerancia = 0.00005
 
         gaussSed = MetodoGaussSeidel(n, matriz, B, x, niter, tolerancia)
         resultado = gaussSed.metodoGaussSeidel()
+        tabla = gaussSed.vector
 
     # cambiar plantilla de gauss y cambiar abajo la direccion a esa plantilla
-    return render_template('gaussSeidel.html', n=int(n), resultado=resultado)
+    return render_template('gaussSeidel.html', n=int(n), resultado=resultado, tabla=tabla)
 
 
 # Interpolacion----------------#
@@ -419,14 +423,13 @@ def newton_diferencias_divididas_rout():
     n = request.form.get('n')
     if str(n) == "None":
         n = 0
-    tabla= np.zeros([int(n), int(n)+1])
-
+    tabla = np.zeros([int(n), int(n)+1])
 
     for i in range(0, int(n)):
         for j in range(0, int(n)+1):
             nombre = str(i+1) + "-" + str(j+1)
             valor = request.form.get(nombre)
-         
+
             if valor == None:
                 valor = 0
             tabla[i, j] = float(valor)
@@ -438,7 +441,7 @@ def newton_diferencias_divididas_rout():
         resultado = interNewton.Newton()
     print(resultado)
 
-    return render_template('newtonConDiferenciasDivididas.html', resultado = resultado)
+    return render_template('newtonConDiferenciasDivididas.html', resultado=resultado)
 
 
 @app.route('/lagrange', methods=['GET', 'POST'])
@@ -464,15 +467,13 @@ def lagrange_rout():
         resultado = interLagr.lagrange()
     print(resultado)
 
-    return render_template('interpolacionLagrange.html', resultado = resultado)
+    return render_template('interpolacionLagrange.html', resultado=resultado)
 
 
 @app.route('/neville', methods=['GET', 'POST'])
 def neville_rout():
 
     return render_template('interpolacionNeville.html')
-
-
 
 
 @app.route('/splineLineal', methods=['GET', 'POST'])
@@ -494,11 +495,10 @@ def spline_lineal_rout():
     print(X)
     print(Y)
     if request.method == "POST":
-        splinelineal= SplineLineal(n, X, Y)
+        splinelineal = SplineLineal(n, X, Y)
         resultado = splinelineal.metodoInterpolacionSplineLineal()
     print(resultado)
-    return render_template('interpolacionSplineLineal.html', resultado = resultado)
-
+    return render_template('interpolacionSplineLineal.html', resultado=resultado)
 
 
 @app.route('/splineCuadratico', methods=['GET', 'POST'])
