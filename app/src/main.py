@@ -160,7 +160,7 @@ def raicesMultiples_rout():
         resultado = raicesMultiples.metodoRaicesMultiples()
         tabla = raicesMultiples.vector
 
-    return render_template('raicesMultiples.html', resultado=resultado, tabla = tabla)
+    return render_template('raicesMultiples.html', resultado=resultado, tabla=tabla)
 
 
 # metodo Newton
@@ -336,14 +336,19 @@ def cholesky_rout():
 
 @app.route('/jacobi', methods=['GET', 'POST'])
 def jacobi_rout():
-    tolerancia = 2.6e-6
-    niter = 16
-    X = [0.0, 0.0, 0.0, 0.0]
+    tolerancia = request.form.get('tolerancia')
+    niter = request.form.get('iteracion')
     n = request.form.get('n')
+    x = []
     if str(n) == "None":
         n = 0
     matriz = np.zeros([int(n), int(n)])
     B = []  # vector terminos independientes
+
+    for i in range(0, int(n)):
+        nombre = "x" + str(i+1)
+        valor = request.form.get(nombre)
+        x.append(float(valor))
 
     for i in range(0, int(n)):
         for j in range(0, int(n)+1):
@@ -356,25 +361,31 @@ def jacobi_rout():
 
     resultado = ""
     if request.method == "POST":
-        print(matriz)
-        print(B)
-        jacobi = MetodoJacobi(n, matriz, B, X, niter, tolerancia)
+        jacobi = MetodoJacobi(n, matriz, B, x, niter, tolerancia)
         resultado = jacobi.metodoJacobi()
-    print(resultado)
+
     # cambiar plantilla de jacobi  y cambiar abajo la direccion a esa plantilla
-    return render_template('Cholesky.html', n=int(n), resultado=resultado)
+    return render_template('jacobi.html', n=int(n), resultado=resultado)
 
 
 @app.route('/gaussSeidel', methods=['GET', 'POST'])
 def GaussSeidel_rout():
-    tolerancia = 2.6e-30
-    niter = 8
-    X = [0.0, 0.0, 0.0, 0.0]
+    tolerancia = request.form.get('tolerancia')
+    niter = request.form.get('iteracion')
     n = request.form.get('n')
+    x = []
+
     if str(n) == "None":
         n = 0
     matriz = np.zeros([int(n), int(n)])
+    
+
     B = []  # vector terminos independientes
+
+    for i in range(0, int(n)):
+        nombre = "x" + str(i+1)
+        valor = request.form.get(nombre)
+        x.append(float(valor))
 
     for i in range(0, int(n)):
         for j in range(0, int(n)+1):
@@ -387,13 +398,15 @@ def GaussSeidel_rout():
 
     resultado = ""
     if request.method == "POST":
-        print(matriz)
-        print(B)
-        gaussSed = MetodoGaussSeidel(n, matriz, B, X, niter, tolerancia)
+        
+        if tolerancia == "None":
+            tolerancia = 0.00005
+
+        gaussSed = MetodoGaussSeidel(n, matriz, B, x, niter, tolerancia)
         resultado = gaussSed.metodoGaussSeidel()
-    print(resultado)
+
     # cambiar plantilla de gauss y cambiar abajo la direccion a esa plantilla
-    return render_template('Cholesky.html', n=int(n), resultado=resultado)
+    return render_template('gaussSeidel.html', n=int(n), resultado=resultado)
 
 
 # Interpolacion----------------#
