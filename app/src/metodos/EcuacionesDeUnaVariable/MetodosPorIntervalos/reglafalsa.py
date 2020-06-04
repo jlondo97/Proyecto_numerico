@@ -14,6 +14,7 @@ class ReglaFalsa:
         self.tolerancia = tolerancia
         self.iteraciones = iteraciones
         self.funcion = funcion
+        self.vector = []
 
     def metodoReglaFalsa(self):
 
@@ -38,10 +39,14 @@ class ReglaFalsa:
             fxm = f.subs(x, xm)
             contador = 1
             error = self.tolerancia + 1
+            self.vector.append([str(contador), str(self.xs), str(
+                xm), str(self.xi), str(fxm), str(error)])
             while(fxm != 0 and error > self.tolerancia and contador < self.iteraciones):
                 if(fxi * fxm < 0):
                     self.xs = xm
                     fxs = f.subs(x, self.xs)
+                    self.vector.append([str(contador), str(self.xs), str(
+                        xm), str(self.xi), str(fxm), str(error)])
                 else:
                     self.xi = xm
                     fxi = f.subs(x, self.xi)
@@ -50,6 +55,8 @@ class ReglaFalsa:
                 fxm = f.subs(x, xm)
                 error = abs(xm - xaux)
                 contador = contador + 1
+                self.vector.append([str(contador), str(self.xs), str(
+                    xm), str(self.xi), str(fxm), str(error)])
             if(fxm == 0):
                 mensaje = (repr(xm) + " es una raiz")
                 return mensaje

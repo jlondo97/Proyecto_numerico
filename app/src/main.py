@@ -18,7 +18,10 @@ from metodos.SistemasDeEcuaciones.MetodosDeFactorizacionDirecta import Croult
 from metodos.SistemasDeEcuaciones.MetodosDeFactorizacionDirecta import Cholesky
 from metodos.SistemasDeEcuaciones.MetodosIterativos import MetodoJacobi
 from metodos.SistemasDeEcuaciones.MetodosIterativos import MetodoGaussSeidel
+
 app = Flask(__name__)
+valores = []
+label = []
 
 
 @app.route('/')  # Decorador o wrap
@@ -49,6 +52,8 @@ def busquedasIncrementales_rout():
 # -------------Metodo de biseccion accediendo a valores del front y renderizando ----------
 @app.route('/biseccion', methods=['GET', 'POST'])  # Decorador o wrap
 def metodoBiseccion_rout():
+    global valores
+    global label
     extremo_inferior = request.form.get('ei')
     funcion = request.form.get('funcion')
     extremo_superior = request.form.get('es')
@@ -56,7 +61,6 @@ def metodoBiseccion_rout():
     iteraciones = request.form.get('iteracion')
     resultado = ""
     tabla = ""
-    valores = ""
 
     if request.method == 'POST':
         # print(funcion, extremo_superior,extremo_inferior,tolerancia,iteraciones)
@@ -65,14 +69,17 @@ def metodoBiseccion_rout():
         resultado = metodoBiseccion.metodoBiseccion()
         tabla = metodoBiseccion.vector
         valores = metodoBiseccion.valores
+        label = metodoBiseccion.labels
 
-    return render_template('biseccion.html', resultado=resultado, tabla=tabla, valores=valores)
+    return render_template('biseccion.html', resultado=resultado, tabla=tabla)
 
 
 @app.route('/get_data_Biseccion')
 def get_data_Biseccion():
-    labels = ['Africa', 'Asia', 'Europe', 'Latin America', 'North America']
-    data = [5578, 5267, 734, 784, 433]
+    global valores
+    global label
+    labels = label
+    data = valores
     return make_response(jsonify({'payload': json.dumps({'data': data, 'labels': labels})}))
 
 
@@ -87,13 +94,15 @@ def reglaFalsa_rout():
     tolerancia = request.form.get('tolerancia')
     iteraciones = request.form.get('iteracion')
     resultado = ""
+    tabla = ""
 
     if request.method == 'POST':
         reglafalsa = ReglaFalsa(
             extremo_inferior, extremo_superior, tolerancia, iteraciones, funcion)
+        tabla = reglafalsa.vector
         resultado = reglafalsa.metodoReglaFalsa()
 
-    return render_template('reglaFalsa.html', resultado=resultado)
+    return render_template('reglaFalsa.html', resultado=resultado, tabla=tabla)
 
 # -----------------------------------Metodos Abiertos --------------------------------------------
 
@@ -106,12 +115,14 @@ def puntoFijo_rout():
     tolerancia = request.form.get('tolerancia')
     iteraciones = request.form.get('iteraciones')
     resultado = ""
+    tabla = []
 
     if request.method == 'POST':
         # print(funcion, extremo_superior,extremo_inferior,tolerancia,iteraciones)
         puntoFijos = PuntoFijo(xa, tolerancia, iteraciones, f, g)
         resultado = puntoFijos.metodoPuntoFijo()
-    return render_template('puntoFijo.html', resultado=resultado)
+        tabla = puntoFijos.vector
+    return render_template('puntoFijo.html', resultado=resultado, tabla=tabla)
 
 # Metodo de la secante
 @app.route('/secante', methods=['GET', 'POST'])  # Decorador o wrap
@@ -122,13 +133,15 @@ def secante_rout():
     tolerancia = request.form.get('tolerancia')
     iteraciones = request.form.get('iteraciones')
     resultado = ""
+    tabla = []
 
     if request.method == 'POST':
         # print(funcion, extremo_superior,extremo_inferior,tolerancia,iteraciones)
         secante = MetodoSecante(x0, x1, tolerancia, iteraciones, f)
         resultado = secante.metodoSecante()
+        tabla = secante.vector
 
-    return render_template('secante.html', resultado=resultado)
+    return render_template('secante.html', resultado=resultado, tabla=tabla)
 
 
 # metodo de raices multiples
@@ -139,11 +152,13 @@ def raicesMultiples_rout():
     tolerancia = request.form.get('tolerancia')
     iteraciones = request.form.get('iteraciones')
     resultado = ""
+    tabla = []
 
     if request.method == 'POST':
         # print(funcion, extremo_superior,extremo_inferior,tolerancia,iteraciones)
         raicesMultiples = MetodoRaicesMultiples(x0, tolerancia, iteraciones, f)
         resultado = raicesMultiples.metodoRaicesMultiples()
+        tabla = raicesMultiples.vector
 
     return render_template('raicesMultiples.html', resultado=resultado)
 
@@ -156,13 +171,15 @@ def metodoNewton_rout():
     tolerancia = request.form.get('tolerancia')
     iteraciones = request.form.get('iteraciones')
     resultado = ""
+    tabla = []
 
     if request.method == 'POST':
         # print(x0, f, tolerancia, iteraciones)
         metodonewton = MetodoNewton(x0, tolerancia, iteraciones, f)
         resultado = metodonewton.metodoNewton()
+        tabla = metodonewton.vector
 
-    return render_template('newton.html', resultado=resultado)
+    return render_template('newton.html', resultado=resultado, tabla=tabla)
 
 
 # ------------------------- Sistemas de ecuaciones ----------
@@ -312,7 +329,7 @@ def cholesky_rout():
         resultado = metodoCholesky.cholesky()
     print(resultado)
 
-    return render_template('Cholesky.html',n=int(n), resultado=resultado)
+    return render_template('Cholesky.html', n=int(n), resultado=resultado)
 
 # Métodos Iterativos----------------#
 
@@ -344,8 +361,8 @@ def jacobi_rout():
         jacobi = MetodoJacobi(n, matriz, B, X, niter, tolerancia)
         resultado = jacobi.metodoJacobi()
     print(resultado)
-    #cambiar plantilla de jacobi  y cambiar abajo la direccion a esa plantilla
-    return render_template('Cholesky.html', n= int(n), resultado = resultado)
+    # cambiar plantilla de jacobi  y cambiar abajo la direccion a esa plantilla
+    return render_template('Cholesky.html', n=int(n), resultado=resultado)
 
 
 @app.route('/gaussSeidel', methods=['GET', 'POST'])
@@ -375,8 +392,8 @@ def GaussSeidel_rout():
         gaussSed = MetodoGaussSeidel(n, matriz, B, X, niter, tolerancia)
         resultado = gaussSed.metodoGaussSeidel()
     print(resultado)
-    #cambiar plantilla de gauss y cambiar abajo la direccion a esa plantilla
-    return render_template('Cholesky.html', n= int(n), resultado = resultado) 
+    # cambiar plantilla de gauss y cambiar abajo la direccion a esa plantilla
+    return render_template('Cholesky.html', n=int(n), resultado=resultado)
 
 
 # Interpolacion----------------#

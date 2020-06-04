@@ -72,8 +72,37 @@
                         <br>
                         <button type="submit" class="btn btn-primary">Enviar</button>
                         <hr class="divider light my-4" />
-                        <input type="text" class="form-control" name="Iteraciones"
-                            placeholder="la raiz de la función es: {{resultado}}">
+                        <input type="text" class="form-control" name="Iteraciones" placeholder="{{resultado}}">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <h2 class="text-white mt-0">Tabla de Ejecucion</h2>
+                        <hr class="divider light my-4" />
+                        <div>
+                            <table class="table table-sm table-dark">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Iteraciones</th>
+                                        <th scope="col">Xn</th>
+                                        <th scope="col">F(xn)</th>
+                                        <th scope="col">F'(xn)</th>
+                                        <th scope="col">F''(Xn)</th>
+                                        <th scope="col">Error</th>
+                                    </tr>
+                                    {%for line in tabla%}
+                                    <tr>
+                                        {%for data in line%}
+                                        <td>{{data}}</td>
+                                        {%endfor%}
+                                    </tr>
+                                    {%endfor%}
+
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>
