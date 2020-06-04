@@ -2,23 +2,21 @@ import numpy as np
 from sympy import *
 import math
 
-def recolectarDatos():
-    n = int(input("Ingrese el numero de puntos: "))
-    x = np.zeros(n)
-    y = np.zeros(n)
-    for i in range(n):
-        puntos = str(input("Ingrese los valores de x" +str(i) + ", f(x" + str(i) + ") separados por espacio: "))
-        valores = puntos.split(" ")
-        x[i] = float(valores[0])
-        y[i] = float(valores[1])
+class SplineLineal:
 
-    metodoInterpolacionSplineLineal(x, y, n)
+    def __init__(self, n, x, y):
 
-def metodoInterpolacionSplineLineal(x, y, n):
-    print("\n")
-    for i in range(1,n):
-        pendiente = (y[i] - y[i-1])/(x[i] - x[i-1])
-        resultado = (pendiente * -x[i]) + y[i]
-        print("P(X" + str(i) + ") = " + str(pendiente) + "X + " + str(resultado) + "        " + str(x[i-1]) + " <= X <= " + str(x[i]))
+            self.n = n
+            self.x = x
+            self.y = y
 
-recolectarDatos()
+    def metodoInterpolacionSplineLineal(self):
+        self.n = int(self.n)
+        print("\n")
+        respuesta = []
+        for i in range(1,self.n):
+            pendiente = (self.y[i] - self.y[i-1])/(self.x[i] - self.x[i-1])
+            resultado = (pendiente * -self.x[i]) + self.y[i]
+            respuesta.append("P(X" + str(i) + ") = " + str(pendiente) + "X + " + str(resultado) + "        " + str(self.x[i-1]) + " <= X <= " + str(self.x[i]))
+        return respuesta
+

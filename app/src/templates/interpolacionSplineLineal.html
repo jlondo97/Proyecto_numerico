@@ -67,6 +67,8 @@
                 </table>
                 <br>
                 <button type="submit" class="btn btn-success">Enviar</button>
+                <hr class="divider light my-4" />
+                <input type="text" class="form-control" name="Iteraciones" placeholder="{{resultado}}" />
 
             </form>
         </div>
@@ -124,10 +126,10 @@
                 debugger;
                 if (Number.isInteger(matrixSizeInputValue)) {
 
-                    for (let i = 1; i <= matrixSizeInputValue; i++) {
+                     for (let i = 1; i <= matrixSizeInputValue; i++) {
                         const row = document.createElement('tr');
                         debugger;
-                        for (let j = 1; j - 1 <= matrixSizeInputValue; j++) {
+                        for (let j = 1; j - 1 <= 1; j++) {
                             debugger;
                             const cell = document.createElement('td');
                             const input = document.createElement('input');
