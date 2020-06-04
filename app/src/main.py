@@ -18,6 +18,9 @@ from metodos.SistemasDeEcuaciones.MetodosDeFactorizacionDirecta import Croult
 from metodos.SistemasDeEcuaciones.MetodosDeFactorizacionDirecta import Cholesky
 from metodos.SistemasDeEcuaciones.MetodosIterativos import MetodoJacobi
 from metodos.SistemasDeEcuaciones.MetodosIterativos import MetodoGaussSeidel
+from metodos.Interpolacion.interpolacionNewtonDiferenciasDivididas import InterpolacionNewton
+from metodos.Interpolacion.interpolacionLagrange import InterpolacionLagrange
+from metodos.Interpolacion.interpolacionSplineLineal import SplineLineal
 
 app = Flask(__name__)
 valores = []
