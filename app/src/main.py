@@ -411,11 +411,57 @@ def GaussSeidel_rout():
 
 # Interpolacion----------------#
 
+@app.route('/newtonConDiferenciasDivididas', methods=['GET', 'POST'])
+def newton_diferencias_divididas_rout():
+    n = request.form.get('n')
+    if str(n) == "None":
+        n = 0
+    tabla= np.zeros([int(n), int(n)+1])
+
+
+    for i in range(0, int(n)):
+        for j in range(0, int(n)+1):
+            nombre = str(i+1) + "-" + str(j+1)
+            valor = request.form.get(nombre)
+         
+            if valor == None:
+                valor = 0
+            tabla[i, j] = float(valor)
+
+    resultado = ""
+    if request.method == "POST":
+        print(tabla)
+        interNewton = InterpolacionNewton(n, tabla)
+        resultado = interNewton.Newton()
+    print(resultado)
+
+    return render_template('newtonConDiferenciasDivididas.html', resultado = resultado)
+
 
 @app.route('/lagrange', methods=['GET', 'POST'])
 def lagrange_rout():
+    n = request.form.get('n')
+    if str(n) == "None":
+        n = 0
+    X = []
+    Y = []
+    for i in range(0, int(n)):
+        for j in range(0, int(2)):
+            nombre = str(i+1) + "-" + str(j+1)
+            valor = request.form.get(nombre)
+            if j == 0:
+                X.append(float(valor))
+            else:
+                Y.append(float(valor))
+    resultado = ""
+    print(X)
+    print(Y)
+    if request.method == "POST":
+        interLagr = InterpolacionLagrange(n, X, Y)
+        resultado = interLagr.lagrange()
+    print(resultado)
 
-    return render_template('interpolacionLagrange.html')
+    return render_template('interpolacionLagrange.html', resultado = resultado)
 
 
 @app.route('/neville', methods=['GET', 'POST'])
@@ -424,16 +470,32 @@ def neville_rout():
     return render_template('interpolacionNeville.html')
 
 
-@app.route('/newtonConDiferenciasDivididas', methods=['GET', 'POST'])
-def newton_diferencias_divididas_rout():
-
-    return render_template('newtonConDiferenciasDivididas.html')
 
 
 @app.route('/splineLineal', methods=['GET', 'POST'])
 def spline_lineal_rout():
+    n = request.form.get('n')
+    if str(n) == "None":
+        n = 0
+    X = []
+    Y = []
+    for i in range(0, int(n)):
+        for j in range(0, int(2)):
+            nombre = str(i+1) + "-" + str(j+1)
+            valor = request.form.get(nombre)
+            if j == 0:
+                X.append(float(valor))
+            else:
+                Y.append(float(valor))
+    resultado = ""
+    print(X)
+    print(Y)
+    if request.method == "POST":
+        splinelineal= SplineLineal(n, X, Y)
+        resultado = splinelineal.metodoInterpolacionSplineLineal()
+    print(resultado)
+    return render_template('interpolacionSplineLineal.html', resultado = resultado)
 
-    return render_template('interpolacionSplineLineal.html')
 
 
 @app.route('/splineCuadratico', methods=['GET', 'POST'])
