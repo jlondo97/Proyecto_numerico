@@ -469,13 +469,6 @@ def lagrange_rout():
 
     return render_template('interpolacionLagrange.html', resultado=resultado)
 
-
-@app.route('/neville', methods=['GET', 'POST'])
-def neville_rout():
-
-    return render_template('interpolacionNeville.html')
-
-
 @app.route('/splineLineal', methods=['GET', 'POST'])
 def spline_lineal_rout():
     n = request.form.get('n')
