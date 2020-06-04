@@ -36,12 +36,12 @@ class MetodoRaicesMultiples:
             fx), str(dfx), str(d2fx), str(errorAbs)])
 
         while fx != 0 and errorAbs > self.tolerancia and denominador != 0 and cont < self.iteraciones:
-            x1 = self.x0 - fx*dfx/denominador
+            x1 = self.x0 - fx*dfx/(dfx**2 - (fx*d2fx))
             fx = f.subs(x, x1)
             dfx = df.subs(x, x1)
             d2fx = d2f.subs(x, x1)
             errorAbs = abs(x1 - self.x0)
-            errorRel = errorAbs/x1
+            #errorRel = errorAbs/x1
             self.x0 = x1
             cont += 1
             self.vector.append([str(cont), str(self.x0), str(

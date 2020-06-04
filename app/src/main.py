@@ -160,7 +160,7 @@ def raicesMultiples_rout():
         resultado = raicesMultiples.metodoRaicesMultiples()
         tabla = raicesMultiples.vector
 
-    return render_template('raicesMultiples.html', resultado=resultado)
+    return render_template('raicesMultiples.html', resultado=resultado, tabla = tabla)
 
 
 # metodo Newton
