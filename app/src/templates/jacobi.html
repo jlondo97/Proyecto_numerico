@@ -41,8 +41,13 @@
                     <hr class="divider my-4" />
                 </div>
                 <div class="col-lg-8 align-self-baseline">
-                    <p class="text-white-75 font-weight-light mb-5">El método de Jacobi es un método iterativo, usado para resolver sistemas de ecuaciones lineales del tipo {\displaystyle A\mathbf {x} =\mathbf {b} }{\displaystyle A\mathbf {x} =\mathbf {b} }. El algoritmo toma su nombre del matemático alemán Carl Gustav Jakob Jacobi. El método de Jacobi consiste en usar fórmulas como iteración de punto fijo.</p>
-                    <a class="btn btn-primary btn-xl js-scroll-trigger" href="#sistemas de ecuaciones">Insertar parámetros</a>
+                    <p class="text-white-75 font-weight-light mb-5">El método de Jacobi es un método iterativo, usado
+                        para resolver sistemas de ecuaciones lineales del tipo {\displaystyle A\mathbf {x} =\mathbf {b}
+                        }{\displaystyle A\mathbf {x} =\mathbf {b} }. El algoritmo toma su nombre del matemático alemán
+                        Carl Gustav Jakob Jacobi. El método de Jacobi consiste en usar fórmulas como iteración de punto
+                        fijo.</p>
+                    <a class="btn btn-primary btn-xl js-scroll-trigger" href="#sistemas de ecuaciones">Insertar
+                        parámetros</a>
                 </div>
             </div>
         </div>
@@ -54,15 +59,35 @@
                 <div class="col-lg-8 text-center">
                     <h2 class="text-white mt-0">Parámetros</h2>
                     <hr class="divider light my-4" />
-                    <input type="text" class="form-control" name="es" placeholder="Tolerancia" require>
+                    <input type="text" class="form-control" name="tolerancia" placeholder="Tolerancia" require>
                     <br>
-                    <input type="text" class="form-control" name="numEc" placeholder="Número de Ecuaciones" require>
+                    <input type="number" id="matrix-size-input" min="0" max="35" class="form-control" name="n"
+                        placeholder="Cantidad de Ecuaciones" required>
+
                     <br>
-                    <input type="text" class="form-control" name="iteracion" placeholder="Máximo de Iteraciones" require>
                     <br>
+                    <input type="text" class="form-control" name="iteracion" placeholder="Máximo de Iteraciones"
+                        require>
+                    <br>
+                    <h2 class="text-white mt-0">Matriz</h2>
+                    <table class="egt" style="align-content: center;">
+                        <tbody id="matrix-table" class="table table-bordered">
+                        </tbody>
+                    </table>
+                    <br>
+                    <h2 class="text-white mt-0">Valores Iniciales</h2>
+                    <table class="egt" style="align-content: center;">
+                        <tbody id="valores-table" class="table table-bordered">
+
+                        </tbody>
+
+                    </table>
+
                     <button type="submit" class="btn btn-success">Enviar</button>
                     <hr class="divider light my-4" />
-                        <input type="text" class="form-control" placeholder="Resultado:  ">
+
+                    <input type="text" class="form-control" value="{{resultado}}" disabled>
+
                 </div>
             </div>
             </div>
@@ -107,6 +132,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
+    <script src="{{url_for('static', filename='javascript/matrix-table.js')}}" type="text/javascript"></script>
+
 </body>
 
 </html>

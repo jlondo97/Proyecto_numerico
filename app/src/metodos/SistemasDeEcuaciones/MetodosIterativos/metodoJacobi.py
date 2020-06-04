@@ -38,6 +38,8 @@ class MetodoJacobi:
 
     def metodoJacobi(self):
         self.n = int(self.n)
+        self.tolerancia = float(self.tolerancia)
+        self.niter = float(self.niter)
         contador = 0
         dispersion = self.tolerancia + 1
         x1 = []
@@ -45,7 +47,7 @@ class MetodoJacobi:
         #print(str(contador) + "    " + str(self.x0) + "\n")
         while dispersion > self.tolerancia and contador < self.niter:
             x1 = calcularNuevoJacobi(self.x0, self.n, self.b, self.A)
-            dispersion = norma(x1, self.x0,self.n)
+            dispersion = norma(x1, self.x0, self.n)
             self.x0 = x1
             contador += 1
             #print(str(contador) + "   " + str(self.x0) + "   " + str(dispersion) + "\n")
@@ -53,7 +55,7 @@ class MetodoJacobi:
         if dispersion < self.tolerancia:
             return(str(x1) + " es una aproximación con una tolerancia: " + str(self.tolerancia))
         else:
-            #return("Fracaso en " + str(self.niter) + " iteraciones")
+            # return("Fracaso en " + str(self.niter) + " iteraciones")
             return(x1)
 
 
@@ -64,15 +66,16 @@ def calcularNuevoJacobi(x0, n, b, A):
         for j in range(n):
             if j != i:
                 valor = x0.pop(j)
-                x0.insert(j,valor)
+                x0.insert(j, valor)
                 suma += A[i][j] * valor
 
         valor = b.pop(i)
-        b.insert(i,valor)
+        b.insert(i, valor)
         elemento = (valor - suma)/A[i][i]
         x1.append(elemento)
 
     return x1
+
 
 def norma(x1, x0, n):
     mayor = -1
@@ -80,12 +83,10 @@ def norma(x1, x0, n):
     for i in range(n):
         valor0 = x0.pop(i)
         valor1 = x1.pop(i)
-        x0.insert(i,valor0)
-        x1.insert(i,valor1)
+        x0.insert(i, valor0)
+        x1.insert(i, valor1)
         if(abs(valor1 - valor0) > mayor):
             mayor = abs(valor1 - valor0)/abs(valor1)
 
     norma = mayor
     return norma
-
-
