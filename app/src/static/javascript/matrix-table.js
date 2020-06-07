@@ -21,6 +21,7 @@ window.onload = () => {
           input.setAttribute("name", i + "-" + j);
           input.setAttribute("style", "width: 40px;");
           input.setAttribute("placeholder", "0");
+          input.setAttribute("required", true);
 
           cell.appendChild(input);
           row.appendChild(cell);
@@ -47,6 +48,7 @@ window.onload = () => {
         input.setAttribute("name", "x" + i);
         input.setAttribute("style", "width: 40px;");
         input.setAttribute("placeholder", "x" + i);
+        input.setAttribute("required", true);
 
         cell.appendChild(input);
         row.appendChild(cell);
