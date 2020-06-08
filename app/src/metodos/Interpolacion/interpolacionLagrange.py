@@ -37,7 +37,7 @@ class InterpolacionLagrange:
             else:
                 polinomio += "(" + str(expand(F)) + ")*" + str(self.y[i]) + " + "
 
-        G = expand(polinomio)
+        G = ("P(x) =" +  str(expand(polinomio)))
         print("\n-----------------------------------POLINOMIO INTERPOLANTE DE LAGRANGE --------------------------------\n \n" + "P(X) = " + str(G))
         return G
 
