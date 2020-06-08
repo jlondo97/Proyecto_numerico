@@ -524,4 +524,4 @@ def index_rout():
 
     return render_template('index.html')
 
-app.run(debug= True) 
+
