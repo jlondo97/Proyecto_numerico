@@ -10,7 +10,7 @@ class InterpolacionLagrange:
             self.n = n
             self.x = x
             self.y = y
-
+            self.proceso = []
     def lagrange(self):
         self.n = int(self.n)
         polinomio = ""
@@ -31,7 +31,7 @@ class InterpolacionLagrange:
             L += ")"
             L = L.replace(")(",")*(")
             F = parse_expr(L)
-            print("\n L" + str(i) + "(x) = " + L.replace("((","(").replace("))",")") + " = " + str(expand(F)))
+            self.proceso.append("\n L" + str(i) + "(x) = " + L.replace("((","(").replace("))",")") + " = " + str(expand(F)))
             if i == self.n-1:
                 polinomio += "(" + str(expand(F)) + ")*" + str(self.y[i])
             else:

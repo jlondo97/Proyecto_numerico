@@ -190,7 +190,10 @@ def metodoNewton_rout():
 # Eliminacion gaussina simple
 @app.route('/eliminacion_gaussiana', methods=['GET', 'POST'])
 def eliminacion_gaussiana_rout():
-
+    objetivos = []
+    matrices = []
+    
+    multiplicadores = []
     n = request.form.get('n')
     if str(n) == "None":
         n = 0
@@ -205,9 +208,17 @@ def eliminacion_gaussiana_rout():
 
         gaussSimple = EliminacionGaussianaSimple(n, matriz)
         resultado = gaussSimple.eliminacionGaussianaSimple()
-        print(resultado)
+        objetivos = gaussSimple.objetivos
+        matrices = gaussSimple.matrices
+        multiplicadores = gaussSimple.multiplicadores   
+       
+        for i in range(0,int(n)):
+         matrices[i] = np.array(matrices[i].split(','))
+         
+        print(matrices[0])
 
-    return render_template('eliminacionGaussiana.html', n=int(n), resultado=resultado)
+
+    return render_template('eliminacionGaussiana.html', n=int(n), resultado=resultado, objetivos = objetivos, matrices = matrices, multiplicadores = multiplicadores)
 
 # Eliminacion gaussina pivoteo parcial----------------#
 @app.route('/pivoteoParcial', methods=['GET', 'POST'])
@@ -447,6 +458,7 @@ def newton_diferencias_divididas_rout():
 @app.route('/lagrange', methods=['GET', 'POST'])
 def lagrange_rout():
     n = request.form.get('n')
+    proceso = []
     if str(n) == "None":
         n = 0
     X = []
@@ -465,9 +477,10 @@ def lagrange_rout():
     if request.method == "POST":
         interLagr = InterpolacionLagrange(n, X, Y)
         resultado = interLagr.lagrange()
+        proceso = interLagr.proceso
     print(resultado)
 
-    return render_template('interpolacionLagrange.html', resultado=resultado)
+    return render_template('interpolacionLagrange.html', resultado=resultado, proceso = proceso, n = int(n))
 
 @app.route('/splineLineal', methods=['GET', 'POST'])
 def spline_lineal_rout():
@@ -491,7 +504,7 @@ def spline_lineal_rout():
         splinelineal = SplineLineal(n, X, Y)
         resultado = splinelineal.metodoInterpolacionSplineLineal()
     print(resultado)
-    return render_template('interpolacionSplineLineal.html', resultado=resultado)
+    return render_template('interpolacionSplineLineal.html', n = int(n), resultado=resultado)
 
 
 @app.route('/splineCuadratico', methods=['GET', 'POST'])
@@ -510,3 +523,5 @@ def spline_cubico_rout():
 def index_rout():
 
     return render_template('index.html')
+
+app.run(debug= True) 

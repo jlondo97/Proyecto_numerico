@@ -12,7 +12,6 @@ class SplineLineal:
 
     def metodoInterpolacionSplineLineal(self):
         self.n = int(self.n)
-        print("\n")
         respuesta = []
         for i in range(1,self.n):
             pendiente = (self.y[i] - self.y[i-1])/(self.x[i] - self.x[i-1])

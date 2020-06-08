@@ -78,7 +78,27 @@
                 <label>x{{i}}=</label> <input type="text" value="{{resultado[i]}}" disabled />
                 {%endfor%}
             </form>
+            <br>
+            <br>
         </div>
+            <div >
+                    <table class="table table-sm table-dark">
+                            <thead>
+                                <tr>
+                    
+                                </tr>
+                                {%for line in matrices%}
+                                <tr>
+                                    {%for data in line%}
+                                    <td>etapa n {{data}}</td>
+                                    {%endfor%}
+                                </tr>
+                                {%endfor%}
+
+                        </table>
+                        <br>
+                    </div>
+                </div>
     </section>
 
     <!-- Contact-->

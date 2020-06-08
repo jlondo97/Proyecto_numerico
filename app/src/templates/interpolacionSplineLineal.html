@@ -67,8 +67,11 @@
                 </table>
                 <br>
                 <button type="submit" class="btn btn-success">Enviar</button>
-                <hr class="divider light my-4" />
-                <input type="text" class="form-control" name="Iteraciones" placeholder="{{resultado}}" />
+                <br>
+                <br>
+                {%for i in range (0,n-1)%}
+                <label>x{{i+1}}=</label>  <input style = "width: 650px;" type="text" value="{{resultado[i]}}"  /> <br>
+                {%endfor%}
 
             </form>
         </div>
@@ -116,12 +119,13 @@
         const matrixSizeInput = document.getElementById('matrix-size-input');
         window.onload = () => {
             matrixSizeInput.addEventListener('keyup', (event) => {
+                
                 debugger;
-
+                
                 const matrixTable = document.getElementById('matrix-table');
-
+                matrixTable.innerHTML = "";
                 const matrixSizeInputValue = !isNaN(event.target.value) ? parseInt(event.target.value) : '';
-
+                
                 matrixSizeInput.value = matrixSizeInputValue;
                 debugger;
                 if (Number.isInteger(matrixSizeInputValue)) {
